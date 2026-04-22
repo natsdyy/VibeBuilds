@@ -73,7 +73,7 @@ const Header: React.FC = () => {
                 to={link.path}
                 className={`transition-colors cursor-pointer ${
                   location.pathname === link.path 
-                    ? 'text-purple-500' 
+                    ? 'text-[#fd9a00]' 
                     : 'text-[var(--text-muted)] hover:text-foreground'
                 }`}
               >
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--card-bg)] backdrop-blur-3xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--card-bg)] backdrop-blur-xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
             >
               {/* Internal Close Button */}
               <button 
@@ -175,7 +175,7 @@ const Header: React.FC = () => {
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
                         className={`text-xl font-black tracking-[0.2em] uppercase transition-all ${
-                          location.pathname === link.path ? 'text-purple-500' : 'text-[var(--text-muted)] hover:text-foreground'
+                          location.pathname === link.path ? 'text-[#fd9a00]' : 'text-[var(--text-muted)] hover:text-foreground'
                         }`}
                       >
                         {link.name}
