@@ -21,7 +21,7 @@ import ismeyeVideo from "../assets/ProjectsVideo/Ismeye'sHaven.mp4"
 
 const projects = [
   { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-purple-500 to-indigo-600" },
-  { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-pink-500 to-rose-600" },
+  { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
   { name: "Ismeye's Haven", image: ismeye, category: "Digital Marketplace", color: "from-amber-500 to-orange-600" },
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
   { name: "Aspire", image: aspire, category: "Healthcare System", color: "from-blue-500 to-cyan-600" },

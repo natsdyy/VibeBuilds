@@ -19,7 +19,7 @@ import portfolio from '../assets/MobileProjects/Portfolio.png'
 
 const projects = [
   { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-purple-500 to-indigo-600" },
-  { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-pink-500 to-rose-600" },
+  { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
   { name: "Ismeye's Haven", image: ismeye, category: "Digital Marketplace", color: "from-amber-500 to-orange-600" },
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
   { name: "Aspire", image: aspire, category: "Healthcare System", color: "from-blue-500 to-cyan-600" },
@@ -186,7 +186,7 @@ const Home: React.FC = () => {
                   title: "Immersive Design",
                   description: "Crafting immersive UI/UX that captivates your audience and transforms visitors into lifelong advocates.",
                   icon: <MousePointer2 className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-purple-600 to-pink-700"
+                  color: "bg-gradient-to-br from-[#fd9a00] to-orange-600"
                 },
                 {
                   title: "Elite Dev",

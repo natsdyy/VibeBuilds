@@ -4,7 +4,7 @@
   --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
   
   --color-brand-blue: #007BFF;
-  --color-brand-orange: #FFA500;
+  --color-brand-orange: #fd9a00;
   --color-neutral-light: #D4D4D4;
   --color-neutral-lighter: #EEEEEE;
   
@@ -36,7 +36,7 @@
 }
 
 body {
-  @apply antialiased selection:bg-purple-500/30;
+  @apply antialiased selection:bg-[#fd9a00]/30;
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
