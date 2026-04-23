@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle2, ArrowRight, ArrowLeft, Laptop, Smartphone, Database, Palette, Gamepad2, Send, Loader2 } from 'lucide-react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
+import toast from 'react-hot-toast'
+
 interface DiscoveryModalProps {
   isOpen: boolean
   onClose: () => void
@@ -36,7 +38,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
     }
 
     if (!executeRecaptcha) {
-      console.log('Execute recaptcha not yet available')
+      toast.error('ReCAPTCHA not ready. Please try again.')
       return
     }
 
@@ -59,16 +61,20 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
       });
 
       if (response.ok) {
+        toast.success('Vision received! We will contact you soon.', {
+          icon: '🚀',
+          duration: 6000
+        })
         setIsVerifying(false)
         setIsSubmitted(true)
       } else {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({ error: 'Server error: Check if backend is running' }));
         throw new Error(errorData.error || 'Failed to send discovery');
       }
       
     } catch (error: any) {
       console.error('Submission Error:', error)
-      alert(error.message || 'Something went wrong. Please try again.')
+      toast.error(error.message || 'Something went wrong. Please try again.')
       setIsVerifying(false)
     }
   }

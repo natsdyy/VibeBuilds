@@ -33,3 +33,6 @@ dist-ssr
 # Vite
 *.ts.timestamp*
 *.js.timestamp*
+
+.vercel
+.env*.local

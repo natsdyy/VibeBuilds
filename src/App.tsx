@@ -11,6 +11,8 @@ import Contact from './pages/Contact';
 import { DiscoveryProvider } from './context/DiscoveryContext';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
+import { Toaster } from 'react-hot-toast';
+
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
@@ -25,6 +27,22 @@ const App: React.FC = () => {
   return (
     <GoogleReCaptchaProvider reCaptchaKey="6LdjtMUsAAAAAEUxbXTeXmKgxXTFsx2FRnzvuUT4">
       <DiscoveryProvider>
+        <Toaster 
+          position="bottom-right"
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#1a1a1a',
+              color: '#fff',
+              border: '1px solid rgba(253, 154, 0, 0.2)',
+              borderRadius: '16px',
+              padding: '16px 24px',
+              fontSize: '14px',
+              fontWeight: '600',
+              backdropFilter: 'blur(10px)',
+            },
+          }}
+        />
         <AnimatePresence>
           {loading && <Preloader />}
         </AnimatePresence>

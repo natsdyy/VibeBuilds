@@ -19,6 +19,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-google-recaptcha-v3": "^1.11.0",
+    "react-hot-toast": "^2.6.0",
     "react-router-dom": "^7.14.2",
     "resend": "^6.12.2",
     "tailwind-merge": "^3.5.0"
