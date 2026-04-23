@@ -5,7 +5,11 @@ import { Preloader } from './components/ui/Preloader';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
+import Services from './pages/Services';
 import Contact from './pages/Contact';
+
+import { DiscoveryProvider } from './context/DiscoveryContext';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -19,20 +23,23 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <AnimatePresence>
-        {loading && <Preloader />}
-      </AnimatePresence>
+    <GoogleReCaptchaProvider reCaptchaKey="6LdjtMUsAAAAAEUxbXTeXmKgxXTFsx2FRnzvuUT4">
+      <DiscoveryProvider>
+        <AnimatePresence>
+          {loading && <Preloader />}
+        </AnimatePresence>
 
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Router>
-    </>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Router>
+      </DiscoveryProvider>
+    </GoogleReCaptchaProvider>
   );
 };
 

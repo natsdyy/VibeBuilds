@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import logoImg from '../../assets/logo.png';
 
 export const Preloader: React.FC = () => {
   return (
@@ -9,12 +10,16 @@ export const Preloader: React.FC = () => {
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[var(--background)]"
     >
       <motion.div 
-        animate={{ scale: [1, 1.05, 1], opacity: [0.7, 1, 0.7] }}
+        animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="w-20 h-20 md:w-24 md:h-24 rounded-[24px] bg-[#fd9a00]/10 border border-[#fd9a00]/20 flex items-center justify-center mb-8 relative"
+        className="w-24 h-24 md:w-32 md:h-32 rounded-[32px] bg-foreground/[0.03] border border-foreground/5 flex items-center justify-center mb-8 relative group"
       >
-        <div className="absolute inset-0 bg-[#fd9a00] blur-xl opacity-20" />
-        <span className="text-[#fd9a00] font-black text-2xl md:text-3xl tracking-tighter relative z-10">VB</span>
+        <div className="absolute inset-0 bg-[#fd9a00] blur-3xl opacity-10 group-hover:opacity-20 transition-opacity" />
+        <img 
+          src={logoImg} 
+          alt="VibeBuilds" 
+          className="w-12 h-12 md:w-16 md:h-16 object-contain relative z-10" 
+        />
       </motion.div>
       
       <div className="h-1 w-48 bg-foreground/10 rounded-full overflow-hidden">
@@ -25,10 +30,6 @@ export const Preloader: React.FC = () => {
           className="h-full bg-gradient-to-r from-[#fd9a00] to-orange-500 rounded-full"
         />
       </div>
-      
-      <p className="mt-6 text-[10px] md:text-xs font-black tracking-[0.4em] uppercase text-[var(--text-muted)] animate-pulse">
-        Initializing Asset Cache
-      </p>
     </motion.div>
   );
 };

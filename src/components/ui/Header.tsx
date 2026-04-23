@@ -4,7 +4,10 @@ import { Globe, Users, Sun, Moon, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
+import { useDiscovery } from '../../context/DiscoveryContext';
+
 const Header: React.FC = () => {
+  const { openDiscovery } = useDiscovery();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -40,6 +43,7 @@ const Header: React.FC = () => {
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
     { name: 'PROJECTS', path: '/projects' },
+    { name: 'SERVICES & PRICING', path: '/services' },
     { name: 'CONTACT', path: '/contact' },
   ];
 
@@ -65,7 +69,7 @@ const Header: React.FC = () => {
           <Link to="/">
             <Logo className="h-8" />
           </Link>
-          
+          <span className="hidden lg:block text-foreground/20 font-light text-xl">/</span>
           <nav className="hidden lg:flex items-center gap-8 text-[12px] font-bold tracking-widest">
             {navLinks.map((link) => (
               <Link 
@@ -73,8 +77,8 @@ const Header: React.FC = () => {
                 to={link.path}
                 className={`transition-colors cursor-pointer ${
                   location.pathname === link.path 
-                    ? 'text-[#fd9a00]' 
-                    : 'text-[var(--text-muted)] hover:text-foreground'
+                ? 'text-[#fd9a00]' 
+                : 'text-[var(--text-muted)] hover:text-foreground'
                 }`}
               >
                 {link.name}
@@ -103,15 +107,16 @@ const Header: React.FC = () => {
             </AnimatePresence>
           </button>
 
-          <Link to="/contact" className="hidden md:block">
+          <div className="hidden md:block">
             <motion.button 
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' }}
+              onClick={openDiscovery}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(253, 154, 0, 0.4)' }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2.5 rounded-xl bg-foreground text-background text-[11px] font-bold tracking-widest shadow-lg"
             >
               GET STARTED
             </motion.button>
-          </Link>
+          </div>
 
           {/* Mobile Burger Menu Button */}
           <button 
@@ -190,11 +195,15 @@ const Header: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                  <button className="w-full py-5 rounded-2xl bg-foreground text-background font-black text-xs tracking-[0.2em] uppercase shadow-2xl">
-                    GET STARTED
-                  </button>
-                </Link>
+                <button 
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    openDiscovery();
+                  }}
+                  className="w-full py-5 rounded-2xl bg-foreground text-background font-black text-xs tracking-[0.2em] uppercase shadow-2xl"
+                >
+                  GET STARTED
+                </button>
               </motion.div>
             </motion.div>
           </>
@@ -203,5 +212,6 @@ const Header: React.FC = () => {
     </header>
   );
 };
+
 
 export default Header;

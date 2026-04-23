@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Header from '../components/ui/Header'
 import Logo from '../components/ui/Logo'
+import Footer from '../components/ui/Footer'
 import GridBackground from '../components/animations/GridBackground'
 import ShinyText from '../components/animations/ShinyText'
 import BlurText from '../components/animations/BlurText'
@@ -274,19 +275,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-[var(--border)] bg-[var(--background)] relative z-10 transition-colors duration-300" id="contact">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <Logo />
-          <div className="flex flex-col md:items-end gap-4">
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-[var(--text-muted)]">
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Terms</a>
-              <a href="#contact" className="hover:text-foreground transition-colors uppercase">Contact</a>
-            </div>
-            <p className="text-[10px] font-black tracking-widest text-foreground/10 uppercase">© 2026 VibeBuilds Digital</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
