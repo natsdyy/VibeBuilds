@@ -217,14 +217,19 @@ const Header: React.FC = () => {
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
+                      initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                      transition={{ 
+                        delay: 0.2 + i * 0.1, 
+                        type: 'spring', 
+                        damping: 20, 
+                        stiffness: 100 
+                      }}
                     >
                       <Link 
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`text-2xl font-black tracking-[0.2em] uppercase transition-all ${
+                        className={`text-3xl font-black tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.3em] ${
                           location.pathname === link.path ? 'text-[#fd9a00]' : 'text-[var(--text-muted)] hover:text-foreground'
                         }`}
                       >
