@@ -105,21 +105,16 @@ const Footer: React.FC = () => {
             <div className="p-8 rounded-[32px] bg-foreground/[0.03] border border-foreground/5 backdrop-blur-sm relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#fd9a00]/10 blur-3xl -z-10 group-hover:bg-[#fd9a00]/20 transition-all duration-500" />
               
-              <h4 className="text-xl font-black tracking-tight mb-4">Stay in the Loop</h4>
-              <p className="text-sm text-[var(--text-muted)] mb-6 font-medium">Get the latest insights on digital engineering and design trends.</p>
+              <h4 className="text-xl font-black tracking-tight mb-4">Let's Build Your Vision</h4>
+              <p className="text-sm text-[var(--text-muted)] mb-6 font-medium">Ready to transform your business? Start your interactive discovery journey today.</p>
               
-              <form className="relative group/form" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
-                  className="w-full h-14 pl-6 pr-16 rounded-2xl bg-background border border-foreground/10 focus:border-[#fd9a00]/50 outline-none transition-all font-medium text-sm"
-                />
+              <Link to="/contact">
                 <button 
-                  className="absolute right-2 top-2 bottom-2 aspect-square rounded-xl bg-foreground text-background flex items-center justify-center hover:bg-[#fd9a00] transition-all duration-300 group/btn"
+                  className="w-full h-14 rounded-2xl bg-foreground text-background font-black text-[10px] tracking-widest flex items-center justify-center gap-3 hover:bg-[#fd9a00] transition-all duration-300 group/btn"
                 >
-                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                  START PROJECT <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
-              </form>
+              </Link>
             </div>
             
             <div className="flex items-center gap-6 pt-4">

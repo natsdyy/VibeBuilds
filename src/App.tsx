@@ -14,6 +14,7 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import { Toaster } from 'react-hot-toast';
 import SupportOverlay from './components/ui/SupportOverlay';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -52,6 +53,7 @@ const App: React.FC = () => {
         </AnimatePresence>
 
         <Router>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

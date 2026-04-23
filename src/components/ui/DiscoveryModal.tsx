@@ -131,17 +131,17 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[40px] shadow-2xl overflow-hidden backdrop-blur-3xl"
+            className="relative w-full max-w-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[40px] shadow-2xl overflow-hidden backdrop-blur-3xl max-h-[90vh] flex flex-col"
           >
             {/* Close Button */}
             <button 
               onClick={onClose}
-              className="absolute top-8 right-8 w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center hover:bg-foreground/10 transition-colors z-20"
+              className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center hover:bg-foreground/10 transition-colors z-30"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="p-8 md:p-12">
+            <div className="p-8 md:p-12 overflow-y-auto custom-scrollbar">
               {!isSubmitted ? (
                 <>
                   <div className="mb-10">
@@ -295,9 +295,9 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                     {step > 1 && !isVerifying && (
                       <button 
                         onClick={handleBack}
-                        className="px-8 py-5 rounded-2xl border border-foreground/10 font-black text-[10px] tracking-widest hover:bg-foreground/5 transition-all flex items-center gap-2"
+                        className="px-6 md:px-8 py-5 rounded-2xl border border-foreground/10 font-black text-[10px] tracking-widest hover:bg-foreground/5 transition-all flex items-center gap-2"
                       >
-                        <ArrowLeft className="w-4 h-4" /> BACK
+                        <ArrowLeft className="w-4 h-4" /> <span className="hidden sm:inline">BACK</span>
                       </button>
                     )}
                     {step < 3 ? (

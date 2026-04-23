@@ -202,7 +202,7 @@ const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--card-bg)] backdrop-blur-xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--background)]/80 backdrop-blur-2xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.3)]"
             >
               {/* Internal Close Button */}
               <button 
@@ -212,8 +212,8 @@ const Header: React.FC = () => {
                 <X className="w-6 h-6" />
               </button>
 
-              <div className="pt-24 space-y-16">
-                <nav className="flex flex-col gap-8">
+              <div className="pt-24 space-y-12">
+                <nav className="flex flex-col gap-6">
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.name}
@@ -224,7 +224,7 @@ const Header: React.FC = () => {
                       <Link 
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`text-xl font-black tracking-[0.2em] uppercase transition-all ${
+                        className={`text-2xl font-black tracking-[0.2em] uppercase transition-all ${
                           location.pathname === link.path ? 'text-[#fd9a00]' : 'text-[var(--text-muted)] hover:text-foreground'
                         }`}
                       >
@@ -245,7 +245,7 @@ const Header: React.FC = () => {
                     setIsMenuOpen(false);
                     openDiscovery();
                   }}
-                  className="w-full py-5 rounded-2xl bg-foreground text-background font-black text-xs tracking-[0.2em] uppercase shadow-2xl"
+                  className="w-full py-6 rounded-2xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase shadow-2xl shadow-[#fd9a00]/30"
                 >
                   GET STARTED
                 </button>
