@@ -9,7 +9,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const Header: React.FC = () => {
   const { openDiscovery } = useDiscovery();
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -43,11 +43,11 @@ const Header: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'PROJECTS', path: '/projects' },
-    { name: 'SERVICES & PRICING', path: '/services' },
-    { name: 'CONTACT', path: '/contact' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.projects'), path: '/projects' },
+    { name: t('nav.services'), path: '/services' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   return (
@@ -159,7 +159,7 @@ const Header: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2.5 rounded-xl bg-foreground text-background text-[11px] font-bold tracking-widest shadow-lg"
             >
-              GET STARTED
+              {t('hero.getStarted')}
             </motion.button>
           </div>
 
@@ -252,7 +252,7 @@ const Header: React.FC = () => {
                   }}
                   className="w-full py-6 rounded-2xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase shadow-2xl shadow-[#fd9a00]/30"
                 >
-                  GET STARTED
+                  {t('hero.getStarted')}
                 </button>
               </motion.div>
             </motion.div>

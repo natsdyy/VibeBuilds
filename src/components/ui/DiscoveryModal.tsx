@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC, cloneElement, ReactElement } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, CheckCircle2, ArrowRight, ArrowLeft, Laptop, Smartphone, Database, Palette, Gamepad2, Send, Loader2 } from 'lucide-react'
+import { X, CheckCircle2, ArrowRight, ArrowLeft, Laptop, Smartphone, Database, Palette, Gamepad2, Send, Loader2, Bot } from 'lucide-react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import toast from 'react-hot-toast'
@@ -89,9 +89,10 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
   const projectTypes = [
     { id: 'web', label: 'Web Application', icon: <Laptop /> },
     { id: 'mobile', label: 'Mobile App', icon: <Smartphone /> },
-    { id: 'enterprise', label: 'Enterprise System', icon: <Database /> },
-    { id: 'design', label: 'UI/UX Design', icon: <Palette /> },
+    { id: 'system', label: 'Custom System', icon: <Database /> },
+    { id: 'bot', label: 'Bot Development', icon: <Bot /> },
     { id: 'game', label: 'Game Development', icon: <Gamepad2 /> },
+    { id: 'design', label: 'UI/UX Design', icon: <Palette /> },
   ]
 
   const budgetRanges = [

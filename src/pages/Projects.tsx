@@ -5,6 +5,7 @@ import Header from '../components/ui/Header'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 import Footer from '../components/ui/Footer'
+import { useLanguage } from '../context/LanguageContext'
 
 // Import Mobile Project Assets
 import dynmovs from '../assets/MobileProjects/Dynmovs.png'
@@ -37,6 +38,7 @@ const videoReels = [
 ]
 
 const Projects: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedVideo, setSelectedVideo] = useState<{name: string, video: string} | null>(null);
 
   return (
@@ -97,13 +99,13 @@ const Projects: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center">
             <BlurText 
-              text="Our Creative Portfolio" 
+              text={t('projects.title')} 
               delay={100}
               animateBy="words"
               className="text-5xl md:text-7xl font-black tracking-tight text-foreground leading-tight justify-center mb-8"
             />
             <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium">
-              Explore the digital solutions we've built for clients worldwide.
+              {t('projects.sub')}
             </p>
           </div>
 

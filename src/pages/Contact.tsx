@@ -6,9 +6,11 @@ import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 import Footer from '../components/ui/Footer'
 import { useDiscovery } from '../context/DiscoveryContext'
+import { useLanguage } from '../context/LanguageContext'
 
 const Contact: React.FC = () => {
   const { openDiscovery } = useDiscovery()
+  const { t } = useLanguage()
 
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
@@ -19,13 +21,13 @@ const Contact: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center">
             <BlurText 
-              text="Let's Build Something Great" 
+              text={t('contact.title')} 
               delay={100}
               animateBy="words"
               className="text-5xl md:text-7xl font-black tracking-tight text-foreground leading-tight justify-center mb-8"
             />
             <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium">
-              Ready to start your next project? Get in touch with our team today.
+              {t('contact.sub')}
             </p>
           </div>
 

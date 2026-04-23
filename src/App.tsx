@@ -27,8 +27,10 @@ const App: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const recaptchaKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LdjtMUsAAAAAEUxbXTeXmKgxXTFsx2FRnzvuUT4";
+
   return (
-    <GoogleReCaptchaProvider reCaptchaKey="6LdjtMUsAAAAAEUxbXTeXmKgxXTFsx2FRnzvuUT4">
+    <GoogleReCaptchaProvider reCaptchaKey={recaptchaKey}>
       <LanguageProvider>
         <DiscoveryProvider>
         <Toaster 

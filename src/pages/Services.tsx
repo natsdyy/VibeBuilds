@@ -1,11 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Check, Zap, Globe, Shield, Cpu, MessageSquare, Layout, Database, ShoppingCart, Gamepad2, Settings, Smartphone, Users, Search, PenTool, Code2, Rocket, BarChart3 } from 'lucide-react'
+import { Check, Zap, Globe, Shield, Cpu, MessageSquare, Layout, Database, ShoppingCart, Gamepad2, Settings, Smartphone, Users, Search, PenTool, Code2, Rocket, BarChart3, Bot } from 'lucide-react'
 import Header from '../components/ui/Header'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 import Footer from '../components/ui/Footer'
 import { useDiscovery } from '../context/DiscoveryContext'
+import { useLanguage } from '../context/LanguageContext'
 
 const plans = [
   {
@@ -29,6 +30,7 @@ const plans = [
       "Everything in Essential",
       "Custom Admin Dashboard",
       "CRM/Database Integration",
+      "Automated Bot Systems",
       "Advanced Animations",
       "3 Months Technical Support"
     ],
@@ -42,9 +44,10 @@ const plans = [
     description: "Enterprise-grade ERP systems and complex digital products.",
     features: [
       "Everything in Advanced",
-      "ERP System Integration",
+      "ERP/CRM System Integration",
       "Cloud Infrastructure Setup",
-      "Game/Interactive Dev",
+      "Game & Interactive Dev",
+      "Custom Bot Architectures",
       "24/7 Priority Support"
     ],
     color: "from-emerald-500/20 to-teal-600/5",
@@ -54,6 +57,7 @@ const plans = [
 
 const Services: React.FC = () => {
   const { openDiscovery } = useDiscovery()
+  const { t } = useLanguage()
   
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
@@ -67,13 +71,13 @@ const Services: React.FC = () => {
               Pricing & Services
             </div>
             <BlurText 
-              text="Investment in Excellence" 
+              text={t('services.title')} 
               delay={100}
               animateBy="words"
               className="text-5xl md:text-8xl font-black tracking-tighter text-foreground leading-tight justify-center mb-8"
             />
             <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium">
-              Transparent pricing in PHP for world-class digital engineering. Choose the plan that scales with your ambition.
+              {t('services.sub')}
             </p>
           </div>
 
@@ -107,6 +111,55 @@ const Services: React.FC = () => {
                   <div className="text-[10px] font-black text-[#fd9a00] mb-2 tracking-widest">{item.step}</div>
                   <h3 className="text-lg font-black mb-2 tracking-tight">{item.name}</h3>
                   <p className="text-xs text-[var(--text-muted)] font-medium leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Core Services Section */}
+          <div className="mb-40">
+            <div className="flex items-center gap-4 mb-16">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
+              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-[#fd9a00] text-center">Core Expertise</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { 
+                  name: "Custom Systems", 
+                  desc: "Architecting robust ERP, CRM, and Management systems to automate your business workflow.", 
+                  icon: <Database />,
+                  color: "from-blue-500/20"
+                },
+                { 
+                  name: "Bot Development", 
+                  desc: "Building advanced automation bots for Telegram, Discord, and custom API integrations.", 
+                  icon: <Bot />,
+                  color: "from-amber-500/20"
+                },
+                { 
+                  name: "Game Development", 
+                  desc: "Creating immersive 2D/3D interactive experiences and web-based games.", 
+                  icon: <Gamepad2 />,
+                  color: "from-emerald-500/20"
+                }
+              ].map((service, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative p-10 rounded-[40px] bg-foreground/[0.02] border border-foreground/5 hover:border-[#fd9a00]/30 transition-all overflow-hidden"
+                >
+                  <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${service.color} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  
+                  <div className="w-16 h-16 rounded-2xl bg-[#fd9a00]/10 text-[#fd9a00] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                    {React.cloneElement(service.icon as React.ReactElement, { className: "w-8 h-8" })}
+                  </div>
+                  <h3 className="text-2xl font-black mb-4 tracking-tight">{service.name}</h3>
+                  <p className="text-sm text-[var(--text-muted)] font-medium leading-relaxed">{service.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -237,8 +290,8 @@ const Services: React.FC = () => {
                     a: "Timelines vary based on complexity. A standard admin dashboard typically takes 4-6 weeks, while a full-scale ERP system may take 3-6 months." 
                   },
                   { 
-                    q: "Do you provide ongoing maintenance after launch?", 
-                    a: "Yes, we offer various support and maintenance retainers to keep your system secure, updated, and optimized for performance." 
+                    q: "What kind of bots and games do you develop?", 
+                    a: "We build everything from Telegram/Discord automation bots to custom trading bots. For games, we specialize in 2D/3D web-based interactive experiences using technologies like Three.js and Unity." 
                   }
                 ].map((faq, i) => (
                   <motion.div

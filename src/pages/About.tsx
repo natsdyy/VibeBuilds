@@ -4,6 +4,7 @@ import Header from '../components/ui/Header'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 import Footer from '../components/ui/Footer'
+import { useLanguage } from '../context/LanguageContext'
 
 // Import Team Images
 import cedric from '../assets/OurTeam/CedricBelisario.png'
@@ -21,6 +22,7 @@ const team = [
 ]
 
 const About: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
       <GridBackground lineColor="rgba(168, 85, 247, 0.1)" spacing={60} />
@@ -30,13 +32,13 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-24 text-center">
             <BlurText 
-              text="The Minds Shaping VibeBuilds" 
+              text={t('about.title')} 
               delay={100}
               animateBy="words"
               className="text-5xl md:text-8xl font-black tracking-tighter text-foreground leading-tight justify-center mb-8"
             />
             <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium">
-              We're more than just developers; we're digital architects dedicated to crafting your vision into reality.
+              {t('about.sub')}
             </p>
           </div>
 
