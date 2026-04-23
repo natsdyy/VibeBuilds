@@ -16,6 +16,8 @@
   border-radius: 40px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   overflow: hidden;
   user-select: none;
   cursor: grab;
