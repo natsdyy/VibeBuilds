@@ -281,6 +281,12 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                             onChange={(e) => setFormData({ ...formData, hp: e.target.value })}
                           />
                         </div>
+                        
+                        {/* reCAPTCHA Compliance Text */}
+                        <div className="text-[10px] text-[var(--text-muted)] text-center mt-6 font-medium leading-relaxed opacity-60">
+                          This site is protected by reCAPTCHA and the Google <br/>
+                          <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className="underline hover:text-[#fd9a00]">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer" className="underline hover:text-[#fd9a00]">Terms of Service</a> apply.
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>

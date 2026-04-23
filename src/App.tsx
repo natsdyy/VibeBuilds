@@ -12,6 +12,7 @@ import { DiscoveryProvider } from './context/DiscoveryContext';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import { Toaster } from 'react-hot-toast';
+import SupportOverlay from './components/ui/SupportOverlay';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -43,6 +44,7 @@ const App: React.FC = () => {
             },
           }}
         />
+        <SupportOverlay />
         <AnimatePresence>
           {loading && <Preloader />}
         </AnimatePresence>
