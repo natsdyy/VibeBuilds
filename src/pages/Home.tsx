@@ -9,6 +9,7 @@ import GridBackground from '../components/animations/GridBackground'
 import ShinyText from '../components/animations/ShinyText'
 import BlurText from '../components/animations/BlurText'
 import CardSwap, { Card } from '../components/animations/CardSwap'
+import { useLanguage } from '../context/LanguageContext'
 
 // Import Mobile Project Assets
 import dynmovs from '../assets/MobileProjects/Dynmovs.png'
@@ -29,6 +30,7 @@ const projects = [
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
@@ -52,7 +54,7 @@ const Home: React.FC = () => {
           
           <div className="mb-8">
             <BlurText 
-              text="Scale Your Vision With Expert Code" 
+              text={t('hero.title')} 
               delay={100}
               animateBy="words"
               className="text-6xl md:text-8xl font-black tracking-tight text-foreground leading-tight justify-center"
@@ -65,7 +67,7 @@ const Home: React.FC = () => {
             transition={{ delay: 0.8 }}
             className="text-lg md:text-xl text-[var(--text-muted)] mb-12 leading-relaxed max-w-2xl font-medium"
           >
-            VibeBuilds delivers high-performance web applications and digital products. We turn complex ideas into seamless user experiences.
+            {t('hero.sub')}
           </motion.p>
 
           <motion.div 
@@ -76,12 +78,12 @@ const Home: React.FC = () => {
           >
             <Link to="/contact">
               <button className="px-10 py-4 rounded-2xl bg-foreground text-background font-black text-sm tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-2xl">
-                GET STARTED
+                {t('hero.getStarted')}
               </button>
             </Link>
             <Link to="/projects">
               <button className="px-10 py-4 rounded-2xl bg-foreground/5 border border-foreground/10 text-foreground font-black text-sm tracking-widest hover:bg-foreground/10 transition-all active:scale-95">
-                OUR WORK
+                {t('hero.ourWork')}
               </button>
             </Link>
           </motion.div>

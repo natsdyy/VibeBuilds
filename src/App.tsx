@@ -9,6 +9,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 
 import { DiscoveryProvider } from './context/DiscoveryContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 import { Toaster } from 'react-hot-toast';
@@ -27,7 +28,8 @@ const App: React.FC = () => {
 
   return (
     <GoogleReCaptchaProvider reCaptchaKey="6LdjtMUsAAAAAEUxbXTeXmKgxXTFsx2FRnzvuUT4">
-      <DiscoveryProvider>
+      <LanguageProvider>
+        <DiscoveryProvider>
         <Toaster 
           position="bottom-right"
           toastOptions={{
@@ -58,7 +60,8 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Router>
-      </DiscoveryProvider>
+        </DiscoveryProvider>
+      </LanguageProvider>
     </GoogleReCaptchaProvider>
   );
 };

@@ -5,11 +5,14 @@ import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
 import { useDiscovery } from '../../context/DiscoveryContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Header: React.FC = () => {
   const { openDiscovery } = useDiscovery();
+  const { language, setLanguage } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const location = useLocation();
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
@@ -106,6 +109,48 @@ const Header: React.FC = () => {
               </motion.div>
             </AnimatePresence>
           </button>
+
+          {/* Language Switcher Dropdown */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex p-2 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-all text-foreground/80 items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden"
+            >
+              <Globe className="w-5 h-5 opacity-60" />
+            </button>
+
+            <AnimatePresence>
+              {isLangOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute top-full mt-3 right-0 w-32 rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] backdrop-blur-2xl shadow-2xl overflow-hidden p-1.5"
+                >
+                  {[
+                    { id: 'en', label: 'English' },
+                    { id: 'tl', label: 'Tagalog' },
+                    { id: 'es', label: 'Español' },
+                  ].map((lang) => (
+                    <button
+                      key={lang.id}
+                      onClick={() => {
+                        setLanguage(lang.id as any);
+                        setIsLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase transition-all ${
+                        language === lang.id 
+                        ? 'bg-[#fd9a00] text-white' 
+                        : 'hover:bg-foreground/5 text-[var(--text-muted)]'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           <div className="hidden md:block">
             <motion.button 
