@@ -52,42 +52,7 @@ const Play: React.FC = () => {
   const mapFeatures = useMemo(() => {
     const features: MapFeature[] = [];
     
-    // Generate Rocks/Crystals (Scaled for 4000x4000)
-    for (let i = 0; i < 150; i++) {
-      features.push({
-        id: `rock-${i}`,
-        type: Math.random() > 0.3 ? 'rock' : 'crystal',
-        x: Math.random() * WORLD_SIZE,
-        y: Math.random() * WORLD_SIZE,
-        size: 20 + Math.random() * 40,
-        hue: Math.random() > 0.5 ? 35 : 280 // Amber or Purple
-      });
-    }
-
-    // Generate Trees (Scaled for 4000x4000)
-    for (let i = 0; i < 240; i++) {
-      features.push({
-        id: `tree-${i}`,
-        type: 'tree',
-        x: Math.random() * WORLD_SIZE,
-        y: Math.random() * WORLD_SIZE,
-        size: 80 + Math.random() * 120,
-        hue: 260 + Math.random() * 40 // Purple leaves
-      });
-    }
-
-    // Generate Ruins (Scaled for 4000x4000)
-    for (let i = 0; i < 20; i++) {
-      features.push({
-        id: `ruin-${i}`,
-        type: 'ruin',
-        x: Math.random() * WORLD_SIZE,
-        y: Math.random() * WORLD_SIZE,
-        size: 150 + Math.random() * 100,
-        hue: 210 // Slate blue
-      });
-    }
-
+    // World is now empty for construction
     return features;
   }, []);
   
@@ -98,13 +63,15 @@ const Play: React.FC = () => {
   const myFrame = useRef(0);
   
   const spriteSheets = useRef<Record<string, HTMLImageElement>>({});
+  const runningAnims = useRef<Record<string, HTMLImageElement[]>>({ 'left': [], 'right': [] });
   const landPattern = useRef<CanvasPattern | null>(null);
   const featureSprites = useRef<Record<string, HTMLCanvasElement>>({});
   const minimapCache = useRef<HTMLCanvasElement | null>(null);
   const keys = useRef<Record<string, boolean>>({});
   const lastUpdate = useRef(0);
+  const lastAnimUpdate = useRef(0);
 
-  // Load Spritesheets for 4 directions and Land
+  // Load Spritesheets and Animations
   useEffect(() => {
     const assets: Record<string, string> = {
       'down': "/assets/mmo/ismeye's/Idle_Standing/Front.png",
@@ -117,6 +84,7 @@ const Play: React.FC = () => {
     const canvas = document.createElement('canvas');
     const tempCtx = canvas.getContext('2d');
 
+    // Load Idle & Land
     Object.entries(assets).forEach(([dir, src]) => {
       const img = new Image();
       img.src = src;
@@ -126,6 +94,19 @@ const Play: React.FC = () => {
           landPattern.current = tempCtx.createPattern(img, 'repeat');
         }
       };
+    });
+
+    // Load Running Animations (5 frames)
+    const animDirections = ['left', 'right'] as const;
+    animDirections.forEach(dir => {
+      const frames: HTMLImageElement[] = [];
+      const dirName = dir.charAt(0).toUpperCase() + dir.slice(1);
+      for (let i = 1; i <= 5; i++) {
+        const img = new Image();
+        img.src = `/assets/mmo/ismeye's/Running ${dirName}/Frame${i}.png`;
+        frames.push(img);
+      }
+      runningAnims.current[dir] = frames;
     });
   }, []);
 
@@ -250,9 +231,11 @@ const Play: React.FC = () => {
         myState.current = 'idle';
       }
 
-      // Update animation frame (approx 10 FPS)
-      if (time - lastUpdate.current > 100) {
-        myFrame.current = (myFrame.current + 1) % 4;
+      // Update animation frame (Approx 100ms per frame)
+      if (time - lastAnimUpdate.current > 100) {
+        const frameLimit = myState.current === 'walk' ? 5 : 1;
+        myFrame.current = (myFrame.current + 1) % frameLimit;
+        lastAnimUpdate.current = time;
       }
 
       // Constraints
@@ -362,17 +345,48 @@ const Play: React.FC = () => {
         ctx.fillStyle = 'rgba(0,0,0,0.3)';
         ctx.beginPath(); ctx.arc(x, y, 15, 0, Math.PI * 2); ctx.fill();
         
-        if (spriteSheets.current[dir]) {
-          const sheet = spriteSheets.current[dir];
-          
-          // Use the whole image for now. If it's a sprite sheet, 
-          // we may need to implement frame clipping later.
+        let activeSprite: HTMLImageElement | null = null;
+        
+        if (state === 'walk' && (dir === 'left' || dir === 'right')) {
+          const anim = runningAnims.current[dir];
+          if (anim && anim.length > 0) {
+            activeSprite = anim[frame % anim.length];
+          }
+        } else {
+          activeSprite = spriteSheets.current[dir];
+        }
+
+        if (activeSprite && activeSprite.complete) {
           const drawSize = 150; 
+          
+          // --- CHARACTER JUICE ---
+          ctx.save();
+          
+          let bobY = 0;
+          let lean = 0;
+          let sX = 1;
+          let sY = 1;
+          
+          if (state === 'walk') {
+            const cycle = (time / 150) % (Math.PI * 2);
+            bobY = Math.sin(cycle) * 8; // Hop height
+            lean = dir === 'left' ? -0.1 : 0.1; // Forward lean
+            sX = 1 + Math.sin(cycle) * 0.05; // Squash/Stretch
+            sY = 1 - Math.sin(cycle) * 0.05;
+          }
+
+          ctx.translate(x, y + bobY);
+          ctx.rotate(lean);
+          ctx.scale(sX, sY);
+
           ctx.drawImage(
-            sheet,
-            0, 0, sheet.width, sheet.height,
-            x - drawSize / 2, y - drawSize + 30, drawSize, drawSize 
+            activeSprite,
+            0, 0, activeSprite.width, activeSprite.height,
+            -drawSize / 2, -drawSize + 30, drawSize, drawSize 
           );
+          
+          ctx.restore();
+          // -----------------------
         } else {
           // Fallback to circle
           ctx.fillStyle = p.color;
