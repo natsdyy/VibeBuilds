@@ -4,9 +4,15 @@ import { Globe, Users, Sun, Moon, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
+import { useDiscovery } from '../../context/DiscoveryContext';
+import { useLanguage } from '../../context/LanguageContext';
+
 const Header: React.FC = () => {
+  const { openDiscovery } = useDiscovery();
+  const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const location = useLocation();
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
@@ -37,10 +43,12 @@ const Header: React.FC = () => {
   };
 
   const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'PROJECTS', path: '/projects' },
-    { name: 'CONTACT', path: '/contact' },
+    { name: t('nav.home'), path: '/' },
+    { name: t('nav.about'), path: '/about' },
+    { name: t('nav.projects'), path: '/projects' },
+    { name: t('nav.services'), path: '/services' },
+    { name: t('nav.labs'), path: '/labs' },
+    { name: t('nav.contact'), path: '/contact' },
   ];
 
   return (
@@ -65,7 +73,7 @@ const Header: React.FC = () => {
           <Link to="/">
             <Logo className="h-8" />
           </Link>
-          
+          <span className="hidden lg:block text-foreground/20 font-light text-xl">/</span>
           <nav className="hidden lg:flex items-center gap-8 text-[12px] font-bold tracking-widest">
             {navLinks.map((link) => (
               <Link 
@@ -73,8 +81,8 @@ const Header: React.FC = () => {
                 to={link.path}
                 className={`transition-colors cursor-pointer ${
                   location.pathname === link.path 
-                    ? 'text-purple-500' 
-                    : 'text-[var(--text-muted)] hover:text-foreground'
+                ? 'text-[#fd9a00]' 
+                : 'text-[var(--text-muted)] hover:text-foreground'
                 }`}
               >
                 {link.name}
@@ -103,15 +111,58 @@ const Header: React.FC = () => {
             </AnimatePresence>
           </button>
 
-          <Link to="/contact" className="hidden md:block">
+          {/* Language Switcher Dropdown */}
+          <div className="relative">
+            <button 
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex p-2 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-all text-foreground/80 items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden"
+            >
+              <Globe className="w-5 h-5 opacity-60" />
+            </button>
+
+            <AnimatePresence>
+              {isLangOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  className="absolute top-full mt-3 right-0 w-32 rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] backdrop-blur-2xl shadow-2xl overflow-hidden p-1.5"
+                >
+                  {[
+                    { id: 'en', label: 'English' },
+                    { id: 'tl', label: 'Tagalog' },
+                    { id: 'es', label: 'Español' },
+                  ].map((lang) => (
+                    <button
+                      key={lang.id}
+                      onClick={() => {
+                        setLanguage(lang.id as any);
+                        setIsLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase transition-all ${
+                        language === lang.id 
+                        ? 'bg-[#fd9a00] text-white' 
+                        : 'hover:bg-foreground/5 text-[var(--text-muted)]'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <div className="hidden md:block">
             <motion.button 
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)' }}
+              onClick={openDiscovery}
+              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(253, 154, 0, 0.4)' }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2.5 rounded-xl bg-foreground text-background text-[11px] font-bold tracking-widest shadow-lg"
             >
-              GET STARTED
+              {t('hero.getStarted')}
             </motion.button>
-          </Link>
+          </div>
 
           {/* Mobile Burger Menu Button */}
           <button 
@@ -152,7 +203,7 @@ const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--card-bg)] backdrop-blur-3xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--background)]/80 backdrop-blur-2xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.3)]"
             >
               {/* Internal Close Button */}
               <button 
@@ -162,20 +213,25 @@ const Header: React.FC = () => {
                 <X className="w-6 h-6" />
               </button>
 
-              <div className="pt-24 space-y-16">
-                <nav className="flex flex-col gap-8">
+              <div className="pt-24 space-y-12">
+                <nav className="flex flex-col gap-6">
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
+                      initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                      transition={{ 
+                        delay: 0.2 + i * 0.1, 
+                        type: 'spring', 
+                        damping: 20, 
+                        stiffness: 100 
+                      }}
                     >
                       <Link 
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`text-xl font-black tracking-[0.2em] uppercase transition-all ${
-                          location.pathname === link.path ? 'text-purple-500' : 'text-[var(--text-muted)] hover:text-foreground'
+                        className={`text-3xl font-black tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.3em] ${
+                          location.pathname === link.path ? 'text-[#fd9a00]' : 'text-[var(--text-muted)] hover:text-foreground'
                         }`}
                       >
                         {link.name}
@@ -190,11 +246,15 @@ const Header: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                  <button className="w-full py-5 rounded-2xl bg-foreground text-background font-black text-xs tracking-[0.2em] uppercase shadow-2xl">
-                    GET STARTED
-                  </button>
-                </Link>
+                <button 
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    openDiscovery();
+                  }}
+                  className="w-full py-6 rounded-2xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase shadow-2xl shadow-[#fd9a00]/30"
+                >
+                  {t('hero.getStarted')}
+                </button>
               </motion.div>
             </motion.div>
           </>
@@ -203,5 +263,6 @@ const Header: React.FC = () => {
     </header>
   );
 };
+
 
 export default Header;

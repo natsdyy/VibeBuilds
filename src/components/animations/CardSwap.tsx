@@ -111,6 +111,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
       }
     });
 
+    const isMobile = window.innerWidth <= 768;
+
     const swap = () => {
       if (order.current.length < 2) return;
 
@@ -119,13 +121,19 @@ const CardSwap: React.FC<CardSwapProps> = ({
       const tl = gsap.timeline();
       tlRef.current = tl;
 
+      // Front card drops out
       tl.to(elFront, {
-        y: '+=500',
-        duration: config.durDrop,
-        ease: config.ease
+        y: isMobile ? '+=400' : '+=600',
+        rotate: isMobile ? 0 : 15,
+        scale: isMobile ? 0.9 : 0.8,
+        opacity: 0,
+        duration: isMobile ? 0.6 : config.durDrop,
+        ease: isMobile ? 'power2.in' : 'back.in(1.7)'
       });
 
-      tl.addLabel('promote', `-=${config.durDrop * config.promoteOverlap}`);
+      tl.addLabel('promote', `-=${isMobile ? 0.4 : config.durDrop * config.promoteOverlap}`);
+      
+      // Promote other cards
       rest.forEach((idx, i) => {
         const el = refs[idx].current!;
         const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
@@ -136,15 +144,18 @@ const CardSwap: React.FC<CardSwapProps> = ({
             x: slot.x,
             y: slot.y,
             z: slot.z,
-            duration: config.durMove,
-            ease: config.ease
+            scale: 1,
+            opacity: 1,
+            duration: isMobile ? 0.5 : config.durMove,
+            ease: isMobile ? 'power2.out' : config.ease
           },
-          `promote+=${i * 0.15}`
+          `promote+=${i * (isMobile ? 0.05 : 0.1)}`
         );
       });
 
       const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
-      tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
+      tl.addLabel('return', `promote+=${(isMobile ? 0.5 : config.durMove) * config.returnDelay}`);
+      
       tl.call(
         () => {
           gsap.set(elFront, { zIndex: backSlot.zIndex });
@@ -152,14 +163,19 @@ const CardSwap: React.FC<CardSwapProps> = ({
         undefined,
         'return'
       );
+
+      // Card returns to back
       tl.to(
         elFront,
         {
           x: backSlot.x,
           y: backSlot.y,
           z: backSlot.z,
-          duration: config.durReturn,
-          ease: config.ease
+          rotate: 0,
+          scale: 1,
+          opacity: 1,
+          duration: isMobile ? 0.5 : config.durReturn,
+          ease: isMobile ? 'power2.out' : config.ease
         },
         'return'
       );

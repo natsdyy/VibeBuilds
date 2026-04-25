@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Laptop, ChevronRight, X, Play } from 'lucide-react'
+import { Laptop, ChevronRight, X, Play, Database, BarChart3, Gamepad2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import Header from '../components/ui/Header'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
+import Footer from '../components/ui/Footer'
+import { useLanguage } from '../context/LanguageContext'
 
 // Import Mobile Project Assets
 import dynmovs from '../assets/MobileProjects/Dynmovs.png'
@@ -20,7 +23,7 @@ import dynmoviesVideo from '../assets/ProjectsVideo/Dynmovies.mp4'
 import ismeyeVideo from "../assets/ProjectsVideo/Ismeye'sHaven.mp4"
 
 const projects = [
-  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-purple-500 to-indigo-600" },
+  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-[#fd9a00] to-indigo-600" },
   { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
   { name: "Ismeye's Haven", image: ismeye, category: "Digital Marketplace", color: "from-amber-500 to-orange-600" },
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
@@ -36,10 +39,11 @@ const videoReels = [
 ]
 
 const Projects: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedVideo, setSelectedVideo] = useState<{name: string, video: string} | null>(null);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-purple-500/30 overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
       <GridBackground lineColor="rgba(168, 85, 247, 0.1)" spacing={60} />
       <Header />
 
@@ -56,7 +60,7 @@ const Projects: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedVideo(null)}
-              className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
+              className="absolute inset-0 bg-black/40 backdrop-blur-xl"
             />
             
             <motion.div
@@ -77,7 +81,8 @@ const Projects: React.FC = () => {
                   key={selectedVideo.video}
                   src={selectedVideo.video} 
                   autoPlay 
-                  controls 
+                  controls
+                  preload="none" 
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -95,21 +100,21 @@ const Projects: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="mb-20 text-center">
             <BlurText 
-              text="Our Creative Portfolio" 
+              text={t('projects.title')} 
               delay={100}
               animateBy="words"
               className="text-5xl md:text-7xl font-black tracking-tight text-foreground leading-tight justify-center mb-8"
             />
             <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto font-medium">
-              Explore the digital solutions we've built for clients worldwide.
+              {t('projects.sub')}
             </p>
           </div>
 
           <div className="mb-32">
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-purple-500">Mobile Experience</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
+              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-[#fd9a00]">Mobile Experience</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
             </div>
 
             {/* Horizontal Mobile Carousel */}
@@ -133,7 +138,7 @@ const Projects: React.FC = () => {
                     key={i}
                     className="flex-shrink-0 w-[240px] md:w-[280px] group"
                   >
-                    <div className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-purple-500/20 group-hover:-translate-y-4 group-hover:rotate-1">
+                    <div className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-[#fd9a00]/20 group-hover:-translate-y-4 group-hover:rotate-1">
                       <img 
                         src={project.image} 
                         alt={project.name}
@@ -141,7 +146,7 @@ const Projects: React.FC = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                       <div className="absolute bottom-8 left-6 right-6">
-                        <p className="text-[8px] font-black tracking-widest text-purple-400 uppercase mb-2">{project.category}</p>
+                        <p className="text-[8px] font-black tracking-widest text-[#fd9a00] uppercase mb-2">{project.category}</p>
                         <h3 className="text-2xl font-black text-white tracking-tighter">{project.name}</h3>
                       </div>
                     </div>
@@ -195,48 +200,69 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
-          {/* Website Projects Section */}
+          {/* Live System Demos Section */}
           <div className="mb-32">
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-blue-500">Web Solutions</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
+              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-[#fd9a00]">Interactive Demos</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {[1, 2].map((_, i) => (
-                <div 
-                  key={i}
-                  className="relative aspect-video rounded-[40px] bg-foreground/[0.02] border border-dashed border-foreground/10 flex flex-col items-center justify-center group overflow-hidden"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { 
+                  name: 'Lead CRM', 
+                  desc: 'Real-time lead tracking and pipeline management system.',
+                  path: '/labs/crm',
+                  icon: <Database className="w-8 h-8" />,
+                  color: 'text-blue-500'
+                },
+                { 
+                  name: 'Sales Intel', 
+                  desc: 'Decision support system with advanced sales forecasting.',
+                  path: '/labs/analytics',
+                  icon: <BarChart3 className="w-8 h-8" />,
+                  color: 'text-emerald-500'
+                },
+                { 
+                  name: 'FlappyVibe', 
+                  desc: 'High-performance HTML5 canvas game engine demo.',
+                  path: '/labs/game',
+                  icon: <Gamepad2 className="w-8 h-8" />,
+                  color: 'text-[#fd9a00]'
+                },
+              ].map((lab, i) => (
+                <Link 
+                  key={i} 
+                  to={lab.path}
+                  className="group relative p-10 rounded-[48px] bg-foreground/[0.02] border border-foreground/10 hover:border-[#fd9a00]/30 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="w-20 h-20 rounded-full bg-foreground/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Laptop className="w-8 h-8 text-[var(--text-muted)]" />
+                  <div className="absolute top-0 right-0 p-6">
+                    <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[8px] font-black tracking-widest text-white/40 uppercase">
+                      View Only
+                    </div>
                   </div>
-                  <h3 className="text-xl font-black tracking-tight mb-2">Web Project {i + 1}</h3>
-                  <div className="px-4 py-1 rounded-full bg-blue-500/10 text-blue-500 text-[8px] font-black tracking-[0.2em] uppercase">
-                    Coming Soon
+
+                  <div className={`w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center mb-8 ${lab.color} group-hover:scale-110 transition-transform duration-500`}>
+                    {lab.icon}
                   </div>
-                  
-                  {/* Subtle Grid Pattern */}
-                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                       style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-                </div>
+
+                  <h3 className="text-2xl font-black tracking-tight mb-3">{lab.name}</h3>
+                  <p className="text-sm text-[var(--text-muted)] font-medium leading-relaxed mb-8">
+                    {lab.desc}
+                  </p>
+
+                  <div className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-[#fd9a00] group-hover:gap-4 transition-all">
+                    Launch Demo <ChevronRight className="w-4 h-4" />
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         </div>
       </main>
 
-      <footer className="py-20 border-t border-[var(--border)] bg-[var(--background)] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="text-[10px] font-black tracking-widest text-foreground/10 uppercase">© 2026 VibeBuilds Digital</div>
-           <div className="flex gap-8 text-[10px] font-black tracking-widest text-[var(--text-muted)]">
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Terms</a>
-            </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

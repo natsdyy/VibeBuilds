@@ -4,10 +4,12 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Header from '../components/ui/Header'
 import Logo from '../components/ui/Logo'
+import Footer from '../components/ui/Footer'
 import GridBackground from '../components/animations/GridBackground'
 import ShinyText from '../components/animations/ShinyText'
 import BlurText from '../components/animations/BlurText'
 import CardSwap, { Card } from '../components/animations/CardSwap'
+import { useLanguage } from '../context/LanguageContext'
 
 // Import Mobile Project Assets
 import dynmovs from '../assets/MobileProjects/Dynmovs.png'
@@ -18,7 +20,7 @@ import aspire from '../assets/MobileProjects/AspireQueueing.png'
 import portfolio from '../assets/MobileProjects/Portfolio.png'
 
 const projects = [
-  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-purple-500 to-indigo-600" },
+  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-[#fd9a00] to-indigo-600" },
   { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
   { name: "Ismeye's Haven", image: ismeye, category: "Digital Marketplace", color: "from-amber-500 to-orange-600" },
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
@@ -28,9 +30,10 @@ const projects = [
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-purple-500/30 overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
       {/* Dynamic Background */}
       <GridBackground lineColor="rgba(168, 85, 247, 0.1)" spacing={60} />
       
@@ -38,7 +41,7 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       <section className="relative pt-64 pb-32 px-6" id="home">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-600/10 blur-[120px] rounded-full -z-10" />
+        <div className="hidden md:block absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#fd9a00]/10 blur-[120px] rounded-full -z-10" />
         
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
           <motion.div 
@@ -51,7 +54,7 @@ const Home: React.FC = () => {
           
           <div className="mb-8">
             <BlurText 
-              text="Scale Your Vision With Expert Code" 
+              text={t('hero.title')} 
               delay={100}
               animateBy="words"
               className="text-6xl md:text-8xl font-black tracking-tight text-foreground leading-tight justify-center"
@@ -64,7 +67,7 @@ const Home: React.FC = () => {
             transition={{ delay: 0.8 }}
             className="text-lg md:text-xl text-[var(--text-muted)] mb-12 leading-relaxed max-w-2xl font-medium"
           >
-            VibeBuilds delivers high-performance web applications and digital products. We turn complex ideas into seamless user experiences.
+            {t('hero.sub')}
           </motion.p>
 
           <motion.div 
@@ -75,12 +78,12 @@ const Home: React.FC = () => {
           >
             <Link to="/contact">
               <button className="px-10 py-4 rounded-2xl bg-foreground text-background font-black text-sm tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-2xl">
-                GET STARTED
+                {t('hero.getStarted')}
               </button>
             </Link>
             <Link to="/projects">
               <button className="px-10 py-4 rounded-2xl bg-foreground/5 border border-foreground/10 text-foreground font-black text-sm tracking-widest hover:bg-foreground/10 transition-all active:scale-95">
-                OUR WORK
+                {t('hero.ourWork')}
               </button>
             </Link>
           </motion.div>
@@ -90,17 +93,17 @@ const Home: React.FC = () => {
       {/* Featured Projects Section */}
       <section className="py-32 relative overflow-hidden transition-colors duration-300" id="projects">
         {/* Decorative background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-purple-600/5 blur-[120px] rounded-full -z-0" />
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#fd9a00]/5 blur-[120px] rounded-full -z-0" />
         
         <div className="max-w-7xl mx-auto px-6 mb-20 relative z-10">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 text-center text-foreground">Featured <span className="text-purple-500">Work</span></h2>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 text-center text-foreground">Featured <span className="text-[#fd9a00]">Work</span></h2>
           <p className="text-[var(--text-muted)] text-lg max-w-xl mx-auto text-center font-medium">Our latest digital creations, ranging from streaming apps to enterprise systems.</p>
         </div>
 
         {/* Infinite Auto-Scrolling Carousel */}
         <div className="relative flex overflow-hidden py-20 bg-foreground/[0.02]">
           <motion.div 
-            className="flex gap-8 px-4"
+            className="flex gap-8 px-4 will-change-transform"
             animate={{
               x: [0, -1872], // 6 projects * (280px + 32px gap)
             }}
@@ -121,7 +124,7 @@ const Home: React.FC = () => {
                 className="flex-shrink-0 w-[240px] md:w-[280px] group perspective-1000"
               >
                 <div 
-                  className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-purple-500/20 group-hover:-translate-y-4 group-hover:rotate-1"
+                  className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-[#fd9a00]/20 group-hover:-translate-y-4 group-hover:rotate-1"
                 >
                   <img 
                     src={project.image} 
@@ -148,10 +151,10 @@ const Home: React.FC = () => {
       <section className="py-32 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-500 text-[10px] font-black tracking-widest uppercase mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[10px] font-black tracking-widest uppercase mb-8">
               The VibeBuilds Way
             </div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Our Engineering <br/><span className="text-purple-500">Process</span></h2>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Our Engineering <br/><span className="text-[#fd9a00]">Process</span></h2>
             <p className="text-[var(--text-muted)] text-xl mb-12 max-w-xl font-medium leading-relaxed">
               We don't just write code; we architect solutions. Our phased approach ensures every project is built for maximum impact and infinite scalability.
             </p>
@@ -164,7 +167,7 @@ const Home: React.FC = () => {
                 "Continuous Edge Optimization"
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4 text-sm font-bold tracking-tight">
-                  <div className="w-6 h-6 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-500">
+                  <div className="w-6 h-6 rounded-lg bg-[#fd9a00]/10 flex items-center justify-center text-[#fd9a00]">
                     <ChevronRight className="w-4 h-4" />
                   </div>
                   {item}
@@ -180,7 +183,7 @@ const Home: React.FC = () => {
                   title: "Digital Strategy",
                   description: "We map out your project's digital architecture to ensure bulletproof scalability and long-term success.",
                   icon: <Globe className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-indigo-600 to-purple-700"
+                  color: "bg-gradient-to-br from-indigo-600 to-[#fd9a00]"
                 },
                 {
                   title: "Immersive Design",
@@ -228,10 +231,10 @@ const Home: React.FC = () => {
       {/* Services/About Section Placeholder */}
       <section className="py-32 px-6 max-w-7xl mx-auto" id="about">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">Built for <span className="text-purple-500">Performance</span></h2>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">Built for <span className="text-[#fd9a00]">Performance</span></h2>
           <p className="text-[var(--text-muted)] text-xl max-w-2xl mx-auto font-medium mb-10">We don't just build websites; we engineer digital experiences that push the boundaries of what's possible on the web.</p>
           <Link to="/about">
-            <button className="px-8 py-3 rounded-xl bg-purple-500 text-white font-black text-xs tracking-[0.2em] uppercase hover:bg-purple-600 transition-all active:scale-95 shadow-xl shadow-purple-500/20">
+            <button className="px-8 py-3 rounded-xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase hover:bg-orange-500 transition-all active:scale-95 shadow-xl shadow-[#fd9a00]/20">
               Meet The Team
             </button>
           </Link>
@@ -261,9 +264,9 @@ const Home: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2 }}
-              className="p-10 rounded-[32px] border border-[var(--border)] bg-foreground/[0.02] backdrop-blur-md hover:border-purple-500/30 transition-all group"
+              className="p-10 rounded-[32px] border border-[var(--border)] bg-foreground/[0.02] backdrop-blur-md hover:border-[#fd9a00]/30 transition-all group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-500 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-500 shadow-lg shadow-purple-500/10">
+              <div className="w-14 h-14 rounded-2xl bg-[#fd9a00]/10 text-[#fd9a00] flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#fd9a00] group-hover:text-white transition-all duration-500 shadow-lg shadow-[#fd9a00]/10">
                 {service.icon}
               </div>
               <h3 className="text-2xl font-bold mb-4 tracking-tight">{service.title}</h3>
@@ -274,19 +277,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 border-t border-[var(--border)] bg-[var(--background)] relative z-10 transition-colors duration-300" id="contact">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <Logo />
-          <div className="flex flex-col md:items-end gap-4">
-            <div className="flex gap-8 text-[10px] font-black tracking-widest text-[var(--text-muted)]">
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Terms</a>
-              <a href="#contact" className="hover:text-foreground transition-colors uppercase">Contact</a>
-            </div>
-            <p className="text-[10px] font-black tracking-widest text-foreground/10 uppercase">© 2026 VibeBuilds Digital</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

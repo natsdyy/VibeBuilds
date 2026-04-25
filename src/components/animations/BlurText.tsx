@@ -42,9 +42,9 @@ const BlurText: React.FC<BlurTextProps> = ({
     
   const defaultTo = animationTo || [
     {
-      filter: 'blur(5px)',
-      opacity: 0.5,
-      transform: direction === 'top' ? 'translate3d(0,5px,0)' : 'translate3d(0,-5px,0)',
+      filter: 'blur(8px)',
+      opacity: 0.3,
+      transform: direction === 'top' ? 'translate3d(0,10px,0)' : 'translate3d(0,-10px,0)',
     },
     { filter: 'blur(0px)', opacity: 1, transform: 'translate3d(0,0,0)' },
   ];
@@ -56,7 +56,9 @@ const BlurText: React.FC<BlurTextProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setInView(true);
+          setTimeout(() => {
+            setInView(true);
+          }, 100); // Slight delay for smoother entrance
           observer.unobserve(currentRef);
         }
       },
@@ -83,8 +85,12 @@ const BlurText: React.FC<BlurTextProps> = ({
           }
         }
         : defaultFrom,
-      delay: i * delay,
-      config: { easing },
+      delay: i * 50, // Faster default stagger for better readability
+      config: { 
+        mass: 1,
+        tension: 200,
+        friction: 20
+      },
     }))
   );
 

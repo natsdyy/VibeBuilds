@@ -1,16 +1,98 @@
-# React + Vite
+<div align="center">
+  <img src="src/assets/logowithname.png" alt="VibeBuilds Logo" width="600" />
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ⚡ VibeBuilds
 
-Currently, two official plugins are available:
+### Scale Your Vision With Expert Code
+**VibeBuilds** is a premium digital agency platform delivering high-performance web applications and immersive digital products. Built with a focus on elite engineering and state-of-the-art UI/UX design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🚀 **High-Performance Development**: Built on React 19 and Vite 8 for blazing-fast load times.
+- 🎨 **Premium UI/UX**: Immersive animations using Framer Motion, GSAP, and React Spring.
+- 📱 **Mobile-First Design**: Optimized for all devices with a focus on performance and rendering speed.
+- 🛠️ **Full-Stack Capability**: Architected for scalability from frontend polish to backend integration.
+- 🌓 **Dynamic Themes**: Support for light/dark modes with a curated amber-orange branding.
+- 🌪️ **Edge Optimization**: Continuous refinement for maximum impact and scalability.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Frontend**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite 8](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations**:
+  - [Framer Motion](https://www.framer.com/motion/)
+  - [GSAP](https://greensock.com/gsap/)
+  - [React Spring](https://www.react-spring.dev/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Routing**: [React Router 7](https://reactrouter.com/)
+
+---
+
+## 📂 Project Structure
+
+```text
+VibeBuilds/
+├── src/
+│   ├── assets/           # Media and static assets
+│   ├── components/       # Reusable components
+│   │   ├── animations/   # High-end animation wrappers
+│   │   ├── ui/           # Base UI elements (Logo, Header, etc.)
+│   │   └── reactbits/    # Specialized interactive components
+│   ├── layouts/          # Page layout templates
+│   ├── pages/            # Main application views (Home, About, etc.)
+│   ├── styles/           # Global styles and Tailwind config
+│   └── types/            # TypeScript definitions
+├── public/               # Public assets
+├── vercel.json           # Vercel deployment configuration
+└── vite.config.ts        # Vite build configuration
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS recommended)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/VibeBuilds.git
+   cd VibeBuilds
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🌐 Deployment
+
+The project is configured for seamless deployment on **Vercel**. Simply push your changes to GitHub and connect your repository to Vercel.
+
+---
+
+## 📄 License
+
+This project is private and proprietary. © 2026 VibeBuilds Digital.

@@ -70,3 +70,33 @@ body {
 .btn-secondary {
   @apply border-2 border-neutral-lighter text-gray-700 px-8 py-3 rounded-xl font-semibold hover:bg-neutral-lighter transition-all hover:scale-105 active:scale-95;
 }
+
+/* Hide reCAPTCHA badge - Compliance text added to DiscoveryModal.tsx */
+.grecaptcha-badge { 
+  visibility: hidden !important; 
+}
+
+/* Custom Scrollbar for Modals */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(253, 154, 0, 0.2);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(253, 154, 0, 0.4);
+}
+
+/* Mobile Touch Optimization */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
