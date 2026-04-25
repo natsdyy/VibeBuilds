@@ -10,6 +10,19 @@ import { useLanguage } from '../context/LanguageContext'
 
 const plans = [
   {
+    name: "Academic",
+    price: "2,000 - 10,000",
+    description: "Simple projects, SHS/College research, assignments, and school activities.",
+    features: [
+      "Rapid Turnaround",
+      "Source Code Included",
+      "Documentation Support",
+      "Free Consultation"
+    ],
+    color: "from-purple-500/20 to-indigo-600/5",
+    accent: "text-purple-500"
+  },
+  {
     name: "Essential",
     price: "20,000",
     description: "Ideal for high-impact landing pages and professional portfolios.",

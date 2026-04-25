@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Preloader } from './components/ui/Preloader';
 import Home from './pages/Home';
@@ -7,6 +7,17 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
+import Labs from './pages/Labs';
+import AnalyticsDemo from './pages/labs/AnalyticsDemo';
+import CRMDemo from './pages/labs/CRMDemo';
+import GameLab from './pages/labs/GameLab';
+import InventoryDemo from './pages/labs/InventoryDemo';
+import EcommerceDemo from './pages/labs/EcommerceDemo';
+import BotDemo from './pages/labs/BotDemo';
+import MMOCreator from './pages/labs/MMOCreator';
+import MMORPGLanding from './pages/mmorpg/Landing';
+import MMORPGPlay from './pages/mmorpg/Play';
+
 
 import { DiscoveryProvider } from './context/DiscoveryContext';
 import { LanguageProvider } from './context/LanguageContext';
@@ -49,24 +60,46 @@ const App: React.FC = () => {
             },
           }}
         />
-        <SupportOverlay />
-        <AnimatePresence>
-          {loading && <Preloader />}
-        </AnimatePresence>
-
         <Router>
-          <ScrollToTop />
-          <Routes>
+          <AppContent loading={loading} />
+        </Router>
+      </DiscoveryProvider>
+    </LanguageProvider>
+  </GoogleReCaptchaProvider>
+);
+};
+
+const AppContent: React.FC<{ loading: boolean }> = ({ loading }) => {
+const location = useLocation();
+const isMMORPG = location.pathname.startsWith('/mmorpg');
+
+return (
+  <>
+    {!isMMORPG && <SupportOverlay />}
+    <AnimatePresence>
+      {loading && <Preloader />}
+    </AnimatePresence>
+
+    <ScrollToTop />
+    <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/labs" element={<Labs />} />
+            <Route path="/labs/analytics" element={<AnalyticsDemo />} />
+            <Route path="/labs/crm" element={<CRMDemo />} />
+            <Route path="/labs/game" element={<GameLab />} />
+            <Route path="/labs/inventory" element={<InventoryDemo />} />
+            <Route path="/labs/ecommerce" element={<EcommerceDemo />} />
+            <Route path="/labs/bot" element={<BotDemo />} />
+            <Route path="/labs/mmo-creator" element={<MMOCreator />} />
+            <Route path="/mmorpg" element={<MMORPGLanding />} />
+            <Route path="/mmorpg/play" element={<MMORPGPlay />} />
+
           </Routes>
-        </Router>
-        </DiscoveryProvider>
-      </LanguageProvider>
-    </GoogleReCaptchaProvider>
+      </>
   );
 };
 

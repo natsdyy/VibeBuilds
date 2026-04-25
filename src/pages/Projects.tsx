@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Laptop, ChevronRight, X, Play } from 'lucide-react'
+import { Laptop, ChevronRight, X, Play, Database, BarChart3, Gamepad2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import Header from '../components/ui/Header'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
@@ -199,33 +200,62 @@ const Projects: React.FC = () => {
             </div>
           </div>
 
-          {/* Website Projects Section */}
+          {/* Live System Demos Section */}
           <div className="mb-32">
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-blue-500">Web Solutions</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
+              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-[#fd9a00]">Interactive Demos</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {[1, 2].map((_, i) => (
-                <div 
-                  key={i}
-                  className="relative aspect-video rounded-[40px] bg-foreground/[0.02] border border-dashed border-foreground/10 flex flex-col items-center justify-center group overflow-hidden"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { 
+                  name: 'Lead CRM', 
+                  desc: 'Real-time lead tracking and pipeline management system.',
+                  path: '/labs/crm',
+                  icon: <Database className="w-8 h-8" />,
+                  color: 'text-blue-500'
+                },
+                { 
+                  name: 'Sales Intel', 
+                  desc: 'Decision support system with advanced sales forecasting.',
+                  path: '/labs/analytics',
+                  icon: <BarChart3 className="w-8 h-8" />,
+                  color: 'text-emerald-500'
+                },
+                { 
+                  name: 'FlappyVibe', 
+                  desc: 'High-performance HTML5 canvas game engine demo.',
+                  path: '/labs/game',
+                  icon: <Gamepad2 className="w-8 h-8" />,
+                  color: 'text-[#fd9a00]'
+                },
+              ].map((lab, i) => (
+                <Link 
+                  key={i} 
+                  to={lab.path}
+                  className="group relative p-10 rounded-[48px] bg-foreground/[0.02] border border-foreground/10 hover:border-[#fd9a00]/30 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-[#fd9a00]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="w-20 h-20 rounded-full bg-foreground/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Laptop className="w-8 h-8 text-[var(--text-muted)]" />
+                  <div className="absolute top-0 right-0 p-6">
+                    <div className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[8px] font-black tracking-widest text-white/40 uppercase">
+                      View Only
+                    </div>
                   </div>
-                  <h3 className="text-xl font-black tracking-tight mb-2">Web Project {i + 1}</h3>
-                  <div className="px-4 py-1 rounded-full bg-blue-500/10 text-blue-500 text-[8px] font-black tracking-[0.2em] uppercase">
-                    Coming Soon
+
+                  <div className={`w-16 h-16 rounded-2xl bg-foreground/5 flex items-center justify-center mb-8 ${lab.color} group-hover:scale-110 transition-transform duration-500`}>
+                    {lab.icon}
                   </div>
-                  
-                  {/* Subtle Grid Pattern */}
-                  <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                       style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-                </div>
+
+                  <h3 className="text-2xl font-black tracking-tight mb-3">{lab.name}</h3>
+                  <p className="text-sm text-[var(--text-muted)] font-medium leading-relaxed mb-8">
+                    {lab.desc}
+                  </p>
+
+                  <div className="flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-[#fd9a00] group-hover:gap-4 transition-all">
+                    Launch Demo <ChevronRight className="w-4 h-4" />
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

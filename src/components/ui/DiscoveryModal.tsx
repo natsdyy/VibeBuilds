@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC, cloneElement, ReactElement } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, CheckCircle2, ArrowRight, ArrowLeft, Laptop, Smartphone, Database, Palette, Gamepad2, Send, Loader2, Bot } from 'lucide-react'
+import { X, CheckCircle2, ArrowRight, ArrowLeft, Laptop, Smartphone, Database, Palette, Gamepad2, Send, Loader2, Bot, BookOpen } from 'lucide-react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import toast from 'react-hot-toast'
@@ -92,11 +92,12 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
     { id: 'system', label: 'Custom System', icon: <Database /> },
     { id: 'bot', label: 'Bot Development', icon: <Bot /> },
     { id: 'game', label: 'Game Development', icon: <Gamepad2 /> },
+    { id: 'academic', label: 'Academic / Research', icon: <BookOpen /> },
     { id: 'design', label: 'UI/UX Design', icon: <Palette /> },
   ]
 
   const budgetRanges = [
-    { id: 'student', label: 'Student / Thesis (Special Rate)' },
+    { id: 'academic', label: '₱2,000 - ₱10,000 (Academic)' },
     { id: 'basic', label: '₱20k - ₱145k' },
     { id: 'standard', label: '₱145k - ₱500k' },
     { id: 'premium', label: '₱500k+' },
@@ -146,7 +147,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
               {!isSubmitted ? (
                 <>
                   <div className="mb-10">
-                    <div className="flex justify-between text-[10px] font-black tracking-widest uppercase text-[#fd9a00] mb-3">
+                    <div className="flex justify-between text-[10px] font-black tracking-widest uppercase text-[#fd9a00] mb-3 pr-12">
                       <span>Step {step} of 3</span>
                       <span>Discovery Phase</span>
                     </div>
