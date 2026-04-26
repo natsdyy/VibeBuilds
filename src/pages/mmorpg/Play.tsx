@@ -177,9 +177,9 @@ const Play: React.FC = () => {
           const nextY = myPos.current.y + (dy / length) * SPEED;
           let canMove = true;
           for (const f of mapFeaturesRef.current) {
-            const dist = Math.sqrt((nextX - f.x)**2 + (nextY - f.y)**2);
+            const distSq = (nextX - f.x)**2 + (nextY - f.y)**2;
             let radius = f.type === 'tree' ? 35 : f.type === 'rock' ? f.size * 0.4 : f.type === 'crystal' ? 20 : 80;
-            if (dist < radius) { canMove = false; break; }
+            if (distSq < radius * radius) { canMove = false; break; }
           }
           if (canMove) {
             myPos.current.x = Math.max(0, Math.min(WORLD_SIZE, nextX));
@@ -211,22 +211,27 @@ const Play: React.FC = () => {
       }
       const targetCamX = isEditModeRef.current && showMapOnlyRef.current ? editorCamRef.current.x : myPos.current.x;
       const targetCamY = isEditModeRef.current && showMapOnlyRef.current ? editorCamRef.current.y : myPos.current.y;
-      const camX = targetCamX - (canvas.width / ZOOM) / 2, camY = targetCamY - (canvas.height / ZOOM) / 2;
+      const viewW = canvas.width / ZOOM, viewH = canvas.height / ZOOM;
+      const camX = targetCamX - viewW / 2, camY = targetCamY - viewH / 2;
 
       ctx.save(); ctx.scale(ZOOM, ZOOM); ctx.translate(-camX, -camY);
-      ctx.fillStyle = '#1a0a1a'; ctx.fillRect(camX, camY, canvas.width / ZOOM, canvas.height / ZOOM);
-      if (landPattern.current) { ctx.fillStyle = landPattern.current; ctx.fillRect(camX, camY, canvas.width / ZOOM, canvas.height / ZOOM); }
       
+      // Draw Land & Background
+      ctx.fillStyle = '#1a0a1a'; ctx.fillRect(camX, camY, viewW, viewH);
+      if (landPattern.current) { ctx.fillStyle = landPattern.current; ctx.fillRect(camX, camY, viewW, viewH); }
+      
+      // Draw Grid
       ctx.strokeStyle = 'rgba(0, 255, 210, 0.05)'; ctx.lineWidth = 1;
-      for (let x = Math.floor(camX / 200) * 200; x <= camX + 1300; x += 200) { ctx.beginPath(); ctx.moveTo(x, camY); ctx.lineTo(x, camY + 800); ctx.stroke(); }
-      for (let y = Math.floor(camY / 200) * 200; y <= camY + 800; y += 200) { ctx.beginPath(); ctx.moveTo(camX, y); ctx.lineTo(camX + 1300, y); ctx.stroke(); }
+      for (let x = Math.floor(camX / 200) * 200; x <= camX + viewW + 200; x += 200) { ctx.beginPath(); ctx.moveTo(x, camY); ctx.lineTo(x, camY + viewH); ctx.stroke(); }
+      for (let y = Math.floor(camY / 200) * 200; y <= camY + viewH + 200; y += 200) { ctx.beginPath(); ctx.moveTo(camX, y); ctx.lineTo(camX + viewW, y); ctx.stroke(); }
 
+      // Draw Main Roads
       ctx.strokeStyle = '#fd9a00'; ctx.lineWidth = 40; ctx.globalAlpha = 0.08;
       ctx.beginPath(); ctx.moveTo(0, 2000); ctx.lineTo(WORLD_SIZE, 2000); ctx.moveTo(2000, 0); ctx.lineTo(2000, WORLD_SIZE); ctx.stroke();
       ctx.globalAlpha = 1.0;
       
       const nightIntensity = Math.sin(vibeTimeRef.current * Math.PI * 2) * 0.5 + 0.5;
-      ctx.fillStyle = `rgba(10, 20, 50, ${nightIntensity * 0.5})`; ctx.fillRect(camX, camY, canvas.width / ZOOM, canvas.height / ZOOM);
+      ctx.fillStyle = `rgba(10, 20, 50, ${nightIntensity * 0.5})`; ctx.fillRect(camX, camY, viewW, viewH);
 
       if (isRainingRef.current) {
         ctx.strokeStyle = 'rgba(174, 194, 255, 0.4)'; ctx.lineWidth = 1;
@@ -234,12 +239,32 @@ const Play: React.FC = () => {
       }
 
       ctx.globalCompositeOperation = 'lighter';
-      particlesRef.current.forEach(p => { ctx.fillStyle = p.color; ctx.globalAlpha = (p.life / p.maxLife) * 0.5; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); });
+      particlesRef.current.forEach(p => { 
+        if (p.x > camX - 50 && p.x < camX + viewW + 50 && p.y > camY - 50 && p.y < camY + viewH + 50) {
+          ctx.fillStyle = p.color; ctx.globalAlpha = (p.life / p.maxLife) * 0.5; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); 
+        }
+      });
       ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1.0;
 
       const renderables: any[] = [];
-      mapFeaturesRef.current.forEach(f => renderables.push({ type: 'feature', data: f, yPos: f.y }));
-      Object.values(playersRef.current).forEach(p => renderables.push({ type: 'player', data: p, x: p.isMe ? myPos.current.x : p.x, y: p.isMe ? myPos.current.y : p.y, yPos: p.isMe ? myPos.current.y : p.y }));
+      const cullMargin = 200;
+      
+      // OPTIMIZATION: Viewport Culling for Map Features
+      mapFeaturesRef.current.forEach(f => {
+        if (f.x > camX - cullMargin && f.x < camX + viewW + cullMargin && f.y > camY - cullMargin && f.y < camY + viewH + cullMargin) {
+          renderables.push({ type: 'feature', data: f, yPos: f.y });
+        }
+      });
+      
+      // OPTIMIZATION: Viewport Culling for Players
+      Object.values(playersRef.current).forEach(p => {
+        const px = p.isMe ? myPos.current.x : p.x;
+        const py = p.isMe ? myPos.current.y : p.y;
+        if (px > camX - cullMargin && px < camX + viewW + cullMargin && py > camY - cullMargin && py < camY + viewH + cullMargin) {
+          renderables.push({ type: 'player', data: p, x: px, y: py, yPos: py });
+        }
+      });
+
       renderables.sort((a, b) => a.yPos - b.yPos).forEach(r => {
         if (r.type === 'feature') {
           const f = r.data;

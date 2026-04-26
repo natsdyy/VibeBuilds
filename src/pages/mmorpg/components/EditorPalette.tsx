@@ -72,6 +72,36 @@ const EditorPalette: React.FC<EditorPaletteProps> = ({
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
+                  const WORLD_SIZE = 4000;
+                  const newTrees: MapFeature[] = [];
+                  for (let i = 0; i < 100; i++) {
+                    let tx, ty;
+                    let isOnPath = true;
+                    while (isOnPath) {
+                      tx = Math.random() * WORLD_SIZE;
+                      ty = Math.random() * WORLD_SIZE;
+                      const nearVerticalPath = Math.abs(tx - 2000) < 180;
+                      const nearHorizontalPath = Math.abs(ty - 2000) < 180;
+                      if (!nearVerticalPath && !nearHorizontalPath) isOnPath = false;
+                    }
+                    newTrees.push({ 
+                      id: `tree-scatter-${Date.now()}-${i}`, 
+                      type: 'tree', 
+                      x: tx, 
+                      y: ty, 
+                      size: 220 + Math.random() * 150, 
+                      hue: Math.random() > 0.5 ? 1 : 2 
+                    });
+                  }
+                  setMapFeatures(prev => [...prev, ...newTrees]);
+                }}
+                className="flex-1 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center hover:bg-emerald-500/30 hover:border-emerald-500/50 transition-all text-[10px] font-bold text-white uppercase"
+              >
+                Scatter Trees
+              </button>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
                   console.log('MAP DATA:', JSON.stringify(mapFeatures));
                   alert('Map data exported to console!');
                 }}

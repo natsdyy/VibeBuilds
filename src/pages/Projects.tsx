@@ -41,6 +41,10 @@ const videoReels = [
 const Projects: React.FC = () => {
   const { t } = useLanguage();
   const [selectedVideo, setSelectedVideo] = useState<{name: string, video: string} | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const paginatedProjects = projects.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
@@ -117,26 +121,21 @@ const Projects: React.FC = () => {
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#fd9a00]/20 to-transparent" />
             </div>
 
-            {/* Horizontal Mobile Carousel */}
-            <div className="relative flex overflow-hidden py-10">
-              <motion.div 
-                className="flex gap-8 px-4"
-                animate={{
-                  x: [0, -1872], 
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 30,
-                    ease: "linear",
-                  },
-                }}
-              >
-                {[...projects, ...projects].map((project, i) => (
-                  <div 
-                    key={i}
-                    className="flex-shrink-0 w-[240px] md:w-[280px] group"
+            {/* Projects Grid */}
+            <motion.div 
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-4"
+            >
+              <AnimatePresence mode="popLayout">
+                {paginatedProjects.map((project, i) => (
+                  <motion.div 
+                    key={project.name}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="group"
                   >
                     <div className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-[#fd9a00]/20 group-hover:-translate-y-4 group-hover:rotate-1">
                       <img 
@@ -150,10 +149,29 @@ const Projects: React.FC = () => {
                         <h3 className="text-2xl font-black text-white tracking-tighter">{project.name}</h3>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </motion.div>
-            </div>
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-4 mt-16">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentPage(i + 1)}
+                    className={`w-12 h-12 rounded-2xl border font-black text-xs transition-all ${
+                      currentPage === i + 1 
+                        ? 'bg-[#fd9a00] border-[#fd9a00] text-white shadow-xl shadow-[#fd9a00]/20' 
+                        : 'bg-white/5 border-white/10 text-[var(--text-muted)] hover:border-[#fd9a00]/50'
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Cinematic Reels Section */}

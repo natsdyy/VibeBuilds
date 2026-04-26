@@ -51,6 +51,9 @@ const Header: React.FC = () => {
     { name: t('nav.contact'), path: '/contact' },
   ];
 
+  const isDarkPage = location.pathname.startsWith('/mmorpg') || location.pathname.startsWith('/labs');
+  const forceDark = theme === 'dark';
+
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'px-6 py-4' : 'px-0 py-0'}`}>
       <motion.div 
@@ -73,19 +76,22 @@ const Header: React.FC = () => {
           <Link to="/">
             <Logo className="h-8" />
           </Link>
-          <span className="hidden lg:block text-foreground/20 font-light text-xl">/</span>
+          <span className={`hidden lg:block font-light text-xl ${forceDark ? 'text-white/20' : 'text-foreground/20'}`}>/</span>
           <nav className="hidden lg:flex items-center gap-8 text-[12px] font-bold tracking-widest">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 to={link.path}
-                className={`transition-colors cursor-pointer ${
+                className={`transition-all duration-300 cursor-pointer relative group/nav ${
                   location.pathname === link.path 
                 ? 'text-[#fd9a00]' 
-                : 'text-[var(--text-muted)] hover:text-foreground'
+                : (forceDark ? 'text-white/70 hover:text-white' : 'text-foreground/70 hover:text-foreground')
                 }`}
               >
                 {link.name}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#fd9a00] transition-all duration-300 ${
+                  location.pathname === link.path ? 'w-full' : 'w-0 group-hover/nav:w-full'
+                }`} />
               </Link>
             ))}
           </nav>
@@ -93,10 +99,14 @@ const Header: React.FC = () => {
 
         {/* Right Side: Actions */}
         <div className="flex items-center gap-2 md:gap-4">
-          {/* Theme Toggle - Now visible on mobile too */}
+          {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
-            className="flex p-2 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-all text-foreground/80 items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden relative"
+            className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden relative ${
+              forceDark 
+              ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' 
+              : 'bg-foreground/5 border-foreground/10 text-foreground/80 hover:bg-foreground/10'
+            }`}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -115,7 +125,11 @@ const Header: React.FC = () => {
           <div className="relative">
             <button 
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex p-2 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 transition-all text-foreground/80 items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden"
+              className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden ${
+                forceDark 
+                ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' 
+                : 'bg-foreground/5 border-foreground/10 text-foreground/80 hover:bg-foreground/10'
+              }`}
             >
               <Globe className="w-5 h-5 opacity-60" />
             </button>
@@ -126,7 +140,9 @@ const Header: React.FC = () => {
                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  className="absolute top-full mt-3 right-0 w-32 rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] backdrop-blur-2xl shadow-2xl overflow-hidden p-1.5"
+                  className={`absolute top-full mt-3 right-0 w-32 rounded-2xl border backdrop-blur-2xl shadow-2xl overflow-hidden p-1.5 ${
+                    forceDark ? 'bg-black/80 border-white/10' : 'bg-[var(--card-bg)] border-[var(--border)]'
+                  }`}
                 >
                   {[
                     { id: 'en', label: 'English' },
@@ -142,7 +158,7 @@ const Header: React.FC = () => {
                       className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase transition-all ${
                         language === lang.id 
                         ? 'bg-[#fd9a00] text-white' 
-                        : 'hover:bg-foreground/5 text-[var(--text-muted)]'
+                        : (forceDark ? 'hover:bg-white/5 text-white/60' : 'hover:bg-foreground/5 text-[var(--text-muted)]')
                       }`}
                     >
                       {lang.label}
@@ -158,7 +174,9 @@ const Header: React.FC = () => {
               onClick={openDiscovery}
               whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(253, 154, 0, 0.4)' }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2.5 rounded-xl bg-foreground text-background text-[11px] font-bold tracking-widest shadow-lg"
+              className={`px-6 py-2.5 rounded-xl text-[11px] font-bold tracking-widest shadow-lg transition-colors ${
+                forceDark ? 'bg-white text-black' : 'bg-foreground text-background'
+              }`}
             >
               {t('hero.getStarted')}
             </motion.button>
@@ -167,7 +185,9 @@ const Header: React.FC = () => {
           {/* Mobile Burger Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-3 rounded-xl bg-foreground/5 text-foreground flex items-center justify-center w-11 h-11 relative z-[60]"
+            className={`lg:hidden p-3 rounded-xl flex items-center justify-center w-11 h-11 relative z-[60] ${
+              forceDark ? 'bg-white/5 text-white' : 'bg-foreground/5 text-foreground'
+            }`}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -203,12 +223,16 @@ const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-[var(--background)]/80 backdrop-blur-2xl border-l border-[var(--border)] z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.3)]"
+              className={`fixed top-0 right-0 bottom-0 w-[85%] max-w-sm border-l z-[65] lg:hidden p-10 flex flex-col justify-between shadow-[-20px_0_50px_rgba(0,0,0,0.3)] backdrop-blur-2xl ${
+                forceDark ? 'bg-black/80 border-white/10' : 'bg-[var(--background)]/80 border-[var(--border)]'
+              }`}
             >
               {/* Internal Close Button */}
               <button 
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-8 right-8 p-3 rounded-xl bg-foreground/5 text-foreground hover:bg-foreground/10 transition-all"
+                className={`absolute top-8 right-8 p-3 rounded-xl transition-all ${
+                  forceDark ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-foreground/5 text-foreground hover:bg-foreground/10'
+                }`}
               >
                 <X className="w-6 h-6" />
               </button>
@@ -231,7 +255,9 @@ const Header: React.FC = () => {
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
                         className={`text-3xl font-black tracking-[0.2em] uppercase transition-all duration-300 hover:tracking-[0.3em] ${
-                          location.pathname === link.path ? 'text-[#fd9a00]' : 'text-[var(--text-muted)] hover:text-foreground'
+                          location.pathname === link.path 
+                          ? 'text-[#fd9a00]' 
+                          : (forceDark ? 'text-white/60 hover:text-white' : 'text-[var(--text-muted)] hover:text-foreground')
                         }`}
                       >
                         {link.name}
@@ -263,6 +289,5 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
 
 export default Header;
