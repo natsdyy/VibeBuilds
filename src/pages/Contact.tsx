@@ -59,6 +59,33 @@ const Contact: React.FC = () => {
                   <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Immediate Support</p>
                 </div>
               </div>
+
+              <div className="pt-8 border-t border-[var(--border)]">
+                <h3 className="text-xs font-black tracking-[0.3em] text-foreground uppercase mb-8">Social Channels</h3>
+                <div className="flex gap-4">
+                  {[
+                    { domain: 'facebook.com', href: 'https://www.facebook.com/profile.php?id=61588893476661', label: 'Facebook' },
+                    { domain: 'discord.com', href: 'https://discord.gg/prVnHEmgZV', label: 'Discord' },
+                    { domain: 'telegram.org', href: 'https://t.me/DynMovies', label: 'Telegram' },
+                  ].map((social, i) => (
+                    <motion.a
+                      key={i}
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      whileHover={{ y: -4, scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-14 h-14 rounded-2xl bg-foreground/5 border border-foreground/10 flex items-center justify-center grayscale hover:grayscale-0 hover:bg-[#fd9a00]/10 hover:border-[#fd9a00]/30 transition-all duration-300 group/social"
+                    >
+                      <img 
+                        src={`https://www.google.com/s2/favicons?sz=64&domain=${social.domain}`} 
+                        className="w-6 h-6" 
+                        alt={social.label} 
+                      />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Discovery CTA */}

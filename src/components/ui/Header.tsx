@@ -102,7 +102,7 @@ const Header: React.FC = () => {
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
-            className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden relative ${
+            className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden relative cursor-pointer ${
               forceDark 
               ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' 
               : 'bg-foreground/5 border-foreground/10 text-foreground/80 hover:bg-foreground/10'
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
           <div className="relative">
             <button 
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden ${
+              className={`flex p-2 rounded-xl border transition-all items-center justify-center w-10 h-10 md:w-11 md:h-11 overflow-hidden cursor-pointer ${
                 forceDark 
                 ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' 
                 : 'bg-foreground/5 border-foreground/10 text-foreground/80 hover:bg-foreground/10'
@@ -155,7 +155,7 @@ const Header: React.FC = () => {
                         setLanguage(lang.id as any);
                         setIsLangOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase transition-all ${
+                      className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase transition-all cursor-pointer ${
                         language === lang.id 
                         ? 'bg-[#fd9a00] text-white' 
                         : (forceDark ? 'hover:bg-white/5 text-white/60' : 'hover:bg-foreground/5 text-[var(--text-muted)]')
@@ -174,7 +174,7 @@ const Header: React.FC = () => {
               onClick={openDiscovery}
               whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(253, 154, 0, 0.4)' }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-2.5 rounded-xl text-[11px] font-bold tracking-widest shadow-lg transition-colors ${
+              className={`px-6 py-2.5 rounded-xl text-[11px] font-bold tracking-widest shadow-lg transition-colors cursor-pointer ${
                 forceDark ? 'bg-white text-black' : 'bg-foreground text-background'
               }`}
             >
@@ -185,7 +185,7 @@ const Header: React.FC = () => {
           {/* Mobile Burger Menu Button */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`lg:hidden p-3 rounded-xl flex items-center justify-center w-11 h-11 relative z-[60] ${
+            className={`lg:hidden p-3 rounded-xl flex items-center justify-center w-11 h-11 relative z-[60] cursor-pointer ${
               forceDark ? 'bg-white/5 text-white' : 'bg-foreground/5 text-foreground'
             }`}
           >
@@ -230,7 +230,7 @@ const Header: React.FC = () => {
               {/* Internal Close Button */}
               <button 
                 onClick={() => setIsMenuOpen(false)}
-                className={`absolute top-8 right-8 p-3 rounded-xl transition-all ${
+                className={`absolute top-8 right-8 p-3 rounded-xl transition-all cursor-pointer ${
                   forceDark ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-foreground/5 text-foreground hover:bg-foreground/10'
                 }`}
               >
@@ -277,7 +277,7 @@ const Header: React.FC = () => {
                     setIsMenuOpen(false);
                     openDiscovery();
                   }}
-                  className="w-full py-6 rounded-2xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase shadow-2xl shadow-[#fd9a00]/30"
+                  className="w-full py-6 rounded-2xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase shadow-2xl shadow-[#fd9a00]/30 cursor-pointer"
                 >
                   {t('hero.getStarted')}
                 </button>

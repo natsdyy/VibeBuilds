@@ -14,11 +14,11 @@ import john from '../assets/OurTeam/JohnMarcoPaja.png'
 import patrick from '../assets/OurTeam/PatrickMirhan.png'
 
 const team = [
-  { name: "Cedric Belisario", role: "Head Developer", image: cedric, color: "from-[#fd9a00]/20" },
-  { name: "Nathaniel Vasquez", role: "Co-Founder", image: nathaniel, color: "from-blue-500/20" },
-  { name: "Charles Alvaran", role: "Chief Marketing Officer CMO", image: charles, color: "from-[#fd9a00]/20" },
-  { name: "John Marco Paja", role: "Founder", image: john, color: "from-emerald-500/20" },
-  { name: "Patrick Mirhan", role: "Chief Technology Officer CTO", image: patrick, color: "from-amber-500/20" },
+  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20" },
+  { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20" },
+  { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20" },
+  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20" },
+  { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20" },
 ]
 
 const About: React.FC = () => {
@@ -72,10 +72,8 @@ const About: React.FC = () => {
                     transition={{ delay: i * 0.1 + 0.3 }}
                   >
                     <p className="text-[10px] font-black tracking-[0.3em] text-[#fd9a00] uppercase mb-3 drop-shadow-lg">Team Member</p>
-                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-2 drop-shadow-2xl">{member.name}</h3>
-                    <div className="h-0 overflow-hidden group-hover:h-8 transition-all duration-500 ease-in-out">
-                      <p className="text-white/70 font-medium text-sm tracking-wide">{member.role}</p>
-                    </div>
+                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-1 drop-shadow-2xl">{member.name}</h3>
+                    <p className="text-white/90 font-bold text-lg tracking-tight opacity-100 transition-all duration-500">{member.role}</p>
                   </motion.div>
                 </div>
 

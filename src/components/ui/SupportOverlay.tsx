@@ -20,7 +20,7 @@ const SupportOverlay: React.FC = () => {
         <motion.button
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
-          className="w-16 h-16 rounded-[24px] bg-[#fd9a00] text-white flex items-center justify-center shadow-2xl shadow-[#fd9a00]/30 hover:shadow-[#fd9a00]/50 transition-all duration-300 relative group"
+          className="w-16 h-16 rounded-[24px] bg-[#fd9a00] text-white flex items-center justify-center shadow-2xl shadow-[#fd9a00]/30 hover:shadow-[#fd9a00]/50 transition-all duration-300 relative group cursor-pointer"
         >
           <Gamepad2 className="w-8 h-8" />
           

@@ -28,10 +28,21 @@ const Footer: React.FC = () => {
   };
 
   const socialLinks = [
-    { icon: <ExternalLink className="w-5 h-5" />, href: '#', label: 'GitHub' },
-    { icon: <MessageSquare className="w-5 h-5" />, href: '#', label: 'Twitter' },
-    { icon: <Briefcase className="w-5 h-5" />, href: '#', label: 'LinkedIn' },
-    { icon: <Camera className="w-5 h-5" />, href: '#', label: 'Instagram' },
+    { 
+      icon: <img src="https://www.google.com/s2/favicons?sz=64&domain=facebook.com" className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" alt="Facebook" />, 
+      href: 'https://www.facebook.com/profile.php?id=61588893476661', 
+      label: 'Facebook' 
+    },
+    { 
+      icon: <img src="https://www.google.com/s2/favicons?sz=64&domain=discord.com" className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" alt="Discord" />, 
+      href: 'https://discord.gg/prVnHEmgZV', 
+      label: 'Discord' 
+    },
+    { 
+      icon: <img src="https://www.google.com/s2/favicons?sz=64&domain=telegram.org" className="w-5 h-5 grayscale group-hover:grayscale-0 transition-all" alt="Telegram" />, 
+      href: 'https://t.me/DynMovies', 
+      label: 'Telegram' 
+    },
   ];
 
   return (
