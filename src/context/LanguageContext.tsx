@@ -55,6 +55,10 @@ const translations = {
     'labs.filter.systems': 'Systems',
     'labs.filter.gaming': 'Gaming',
     'labs.filter.ecommerce': 'E-Commerce',
+    'labs.configurator.title': '3D Product Configurator',
+    'labs.configurator.desc': 'Interactive tool for real-time product customization and dynamic pricing.',
+    'labs.checkout.title': 'Smart Checkout',
+    'labs.checkout.desc': 'High-speed, single-page checkout flow optimized for maximum conversion.',
 
   },
   tl: {
@@ -103,6 +107,10 @@ const translations = {
     'labs.filter.systems': 'Mga Sistema',
     'labs.filter.gaming': 'Gaming',
     'labs.filter.ecommerce': 'E-Commerce',
+    'labs.configurator.title': '3D Configurator ng Produkto',
+    'labs.configurator.desc': 'Interactive na tool para sa real-time na customization at dynamic na presyo.',
+    'labs.checkout.title': 'Mabilis na Checkout',
+    'labs.checkout.desc': 'High-speed checkout flow na binuo para sa pinakamataas na conversion.',
 
   },
   es: {
@@ -151,6 +159,10 @@ const translations = {
     'labs.filter.systems': 'Sistemas',
     'labs.filter.gaming': 'Gaming',
     'labs.filter.ecommerce': 'E-Commerce',
+    'labs.configurator.title': 'Configurador de Productos 3D',
+    'labs.configurator.desc': 'Herramienta interactiva para personalización en tiempo real y precios dinámicos.',
+    'labs.checkout.title': 'Pago Inteligente',
+    'labs.checkout.desc': 'Flujo de pago de alta velocidad optimizado para la máxima conversión.',
 
   }
 };
