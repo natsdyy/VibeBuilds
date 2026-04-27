@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Beaker, BarChart3, Database, Gamepad2, ArrowRight, Box, ShoppingCart, Sword, LayoutGrid, MessageSquare, Users, Clock } from 'lucide-react';
+import { Beaker, BarChart3, Database, Gamepad2, ArrowRight, Box, ShoppingCart, Sword, LayoutGrid, MessageSquare, Users, Clock, Calculator, CalendarDays, Briefcase } from 'lucide-react';
 
 import { Link } from 'react-router-dom';
 import Header from '../components/ui/Header';
@@ -71,6 +71,36 @@ const Labs: React.FC = () => {
       path: '/labs/attendance',
       color: 'from-emerald-600 to-teal-500',
       status: 'Workforce Sample',
+      category: 'systems'
+    },
+    {
+      id: 'pos',
+      title: t('labs.pos.title'),
+      description: t('labs.pos.desc'),
+      icon: <Calculator className="w-8 h-8" />,
+      path: '/labs/pos',
+      color: 'from-[#fd9a00] to-orange-500',
+      status: 'Commerce Sample',
+      category: 'ecommerce'
+    },
+    {
+      id: 'booking',
+      title: t('labs.booking.title'),
+      description: t('labs.booking.desc'),
+      icon: <CalendarDays className="w-8 h-8" />,
+      path: '/labs/booking',
+      color: 'from-indigo-600 to-violet-500',
+      status: 'Utility Sample',
+      category: 'systems'
+    },
+    {
+      id: 'hr',
+      title: t('labs.hr.title'),
+      description: t('labs.hr.desc'),
+      icon: <Briefcase className="w-8 h-8" />,
+      path: '/labs/hr',
+      color: 'from-emerald-600 to-teal-500',
+      status: 'Enterprise System',
       category: 'systems'
     },
     {
