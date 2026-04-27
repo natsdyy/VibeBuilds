@@ -138,7 +138,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
             {/* Close Button */}
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center hover:bg-foreground/10 transition-colors z-30"
+              className="absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 rounded-full bg-foreground/5 flex items-center justify-center hover:bg-foreground/10 transition-colors z-30 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -174,7 +174,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                             <button
                               key={type.id}
                               onClick={() => setFormData({ ...formData, type: type.label })}
-                              className={`p-6 rounded-2xl border flex items-center gap-4 transition-all ${
+                              className={`p-6 rounded-2xl border flex items-center gap-4 transition-all cursor-pointer ${
                                 formData.type === type.label 
                                   ? 'border-[#fd9a00] bg-[#fd9a00]/10 text-[#fd9a00]' 
                                   : 'border-foreground/5 bg-foreground/[0.02] hover:border-foreground/20'
@@ -204,7 +204,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                             <div key={range.id} className="space-y-4">
                               <button
                                 onClick={() => setFormData({ ...formData, budget: range.label })}
-                                className={`w-full p-6 rounded-2xl border flex items-center justify-between transition-all ${
+                                className={`w-full p-6 rounded-2xl border flex items-center justify-between transition-all cursor-pointer ${
                                   formData.budget === range.label 
                                     ? 'border-[#fd9a00] bg-[#fd9a00]/10 text-[#fd9a00]' 
                                     : 'border-foreground/5 bg-foreground/[0.02] hover:border-foreground/20'
@@ -297,7 +297,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                     {step > 1 && !isVerifying && (
                       <button 
                         onClick={handleBack}
-                        className="px-6 md:px-8 py-5 rounded-2xl border border-foreground/10 font-black text-[10px] tracking-widest hover:bg-foreground/5 transition-all flex items-center gap-2"
+                        className="px-6 md:px-8 py-5 rounded-2xl border border-foreground/10 font-black text-[10px] tracking-widest hover:bg-foreground/5 transition-all flex items-center gap-2 cursor-pointer"
                       >
                         <ArrowLeft className="w-4 h-4" /> <span className="hidden sm:inline">BACK</span>
                       </button>
@@ -310,7 +310,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                           false
                         }
                         onClick={handleNext}
-                        className="flex-1 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-[#fd9a00]/20"
+                        className="flex-1 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-[#fd9a00]/20 cursor-pointer"
                       >
                         NEXT STEP <ArrowRight className="w-4 h-4" />
                       </button>
@@ -318,7 +318,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                       <button 
                         disabled={!formData.name || !formData.email || isVerifying}
                         onClick={handleSubmit}
-                        className="flex-1 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl shadow-[#fd9a00]/20"
+                        className="flex-1 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl shadow-[#fd9a00]/20 cursor-pointer"
                       >
                         {isVerifying ? (
                           <>VERIFYING... <Loader2 className="w-4 h-4 animate-spin" /></>
@@ -344,7 +344,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                   </p>
                   <button 
                     onClick={onClose}
-                    className="px-12 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all shadow-xl shadow-[#fd9a00]/20"
+                    className="px-12 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-[10px] tracking-widest hover:opacity-90 transition-all shadow-xl shadow-[#fd9a00]/20 cursor-pointer"
                   >
                     CLOSE WINDOW
                   </button>

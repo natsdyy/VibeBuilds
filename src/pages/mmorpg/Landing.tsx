@@ -11,7 +11,7 @@ import GridBackground from '../../components/animations/GridBackground';
 
 const MMORPGLanding: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-[#fd9a00]/30 overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-500">
       <GridBackground spacing={80} />
       <Header />
 
@@ -39,7 +39,7 @@ const MMORPGLanding: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
+            className="text-[var(--text-muted)] text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
           >
             A persistent, real-time multiplayer universe built entirely for the web. 
             Experience zero-latency interaction in a stunning digital realm.
@@ -53,14 +53,14 @@ const MMORPGLanding: React.FC = () => {
           >
             <Link 
               to="/mmorpg/play"
-              className="group relative px-10 py-5 bg-[#fd9a00] text-black font-black text-xs tracking-widest uppercase rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-amber-500/20"
+              className="group relative px-10 py-5 bg-[#fd9a00] text-white font-black text-xs tracking-widest uppercase rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-amber-500/20"
             >
               <span className="relative z-10 flex items-center gap-3">
                 Enter World <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
-            <button className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black text-xs tracking-widest uppercase rounded-2xl hover:bg-white/10 transition-all">
-              Watch Trailer
+            <button className="px-10 py-5 bg-foreground/5 border border-foreground/10 text-foreground/50 font-black text-xs tracking-widest uppercase rounded-2xl cursor-not-allowed transition-all">
+              Coming Soon
             </button>
           </motion.div>
         </section>
@@ -91,34 +91,19 @@ const MMORPGLanding: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="p-10 rounded-[40px] bg-white/5 border border-white/10 backdrop-blur-sm hover:border-[#fd9a00]/30 transition-all group"
+                className="p-10 rounded-[40px] bg-[var(--card-bg)] border border-[var(--border)] backdrop-blur-sm hover:border-[#fd9a00]/30 transition-all group"
               >
                 <div className="w-14 h-14 rounded-2xl bg-[#fd9a00]/10 flex items-center justify-center text-[#fd9a00] mb-8 group-hover:scale-110 transition-transform">
                   {feature.icon}
                 </div>
                 <h3 className="text-2xl font-black mb-4">{feature.title}</h3>
-                <p className="text-gray-400 font-medium leading-relaxed">{feature.desc}</p>
+                <p className="text-[var(--text-muted)] font-medium leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="py-32 bg-[#fd9a00]/5 border-y border-white/5">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-            {[
-              { label: "Active Players", value: "1.2k+" },
-              { label: "World Regions", value: "12" },
-              { label: "Server Latency", value: "14ms" },
-              { label: "Uptime", value: "99.9%" }
-            ].map((stat, i) => (
-              <div key={i}>
-                <p className="text-[#fd9a00] text-4xl md:text-5xl font-black mb-2 tracking-tighter">{stat.value}</p>
-                <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+
       </main>
 
       <Footer />

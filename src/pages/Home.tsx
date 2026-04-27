@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Globe, Zap, Laptop, MousePointer2, ChevronRight, ChevronLeft } from 'lucide-react'
+import { Globe, Zap, Laptop, MousePointer2, ChevronRight, ChevronLeft, ArrowRight } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Header from '../components/ui/Header'
@@ -96,16 +96,27 @@ const Home: React.FC = () => {
         <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#fd9a00]/5 blur-[120px] rounded-full -z-0" />
         
         <div className="max-w-7xl mx-auto px-6 mb-20 relative z-10">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 text-center text-foreground">Featured <span className="text-[#fd9a00]">Work</span></h2>
-          <p className="text-[var(--text-muted)] text-lg max-w-xl mx-auto text-center font-medium">Our latest digital creations, ranging from streaming apps to enterprise systems.</p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="text-left">
+              <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-4 text-foreground leading-[0.9]">Featured <br/><span className="text-[#fd9a00]">Work</span></h2>
+              <p className="text-[var(--text-muted)] text-lg max-w-xl font-medium">Our latest digital creations, ranging from streaming apps to enterprise systems.</p>
+            </div>
+            <Link to="/projects">
+              <button className="group flex items-center gap-4 px-8 py-4 rounded-2xl bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] font-black text-xs tracking-widest uppercase hover:bg-[#fd9a00] hover:text-white transition-all active:scale-95 shadow-xl shadow-[#fd9a00]/5">
+                View All Projects <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+          </div>
         </div>
 
-        {/* Infinite Auto-Scrolling Carousel */}
-        <div className="relative flex overflow-hidden py-20 bg-foreground/[0.02]">
+        {/* Kinetic Draggable & Looping Carousel */}
+        <div className="relative overflow-hidden py-10 bg-foreground/[0.02] cursor-grab active:cursor-grabbing">
           <motion.div 
-            className="flex gap-8 px-4 will-change-transform"
+            drag="x"
+            dragConstraints={{ right: 0, left: -1872 * 2 }} // Double the constraint for triple the items
+            dragElastic={0.05}
             animate={{
-              x: [0, -1872], // 6 projects * (280px + 32px gap)
+              x: [0, -1872],
             }}
             transition={{
               x: {
@@ -115,13 +126,14 @@ const Home: React.FC = () => {
                 ease: "linear",
               },
             }}
-            whileHover={{ transition: { duration: 80 } }} // Slow down on hover
+            whileHover={{ transition: { duration: 80 } }} // Slow down on hover to let users drag
+            whileTap={{ cursor: "grabbing" }}
+            className="flex gap-8 px-8 w-max"
           >
-            {/* Double the projects for a seamless loop */}
-            {[...projects, ...projects].map((project, i) => (
+            {[...projects, ...projects, ...projects].map((project, i) => (
               <div 
                 key={i}
-                className="flex-shrink-0 w-[240px] md:w-[280px] group perspective-1000"
+                className="flex-shrink-0 w-[260px] md:w-[320px] group perspective-1000"
               >
                 <div 
                   className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-[#fd9a00]/20 group-hover:-translate-y-4 group-hover:rotate-1"
