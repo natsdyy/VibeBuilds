@@ -107,7 +107,19 @@ const EditorPalette: React.FC<EditorPaletteProps> = ({
                 }}
                 className="flex-1 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#fd9a00]/20 hover:border-[#fd9a00]/50 transition-all text-[10px] font-bold text-white uppercase"
               >
-                Export JSON
+                Export
+              </button>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (window.confirm('Reset map to defaults? This will clear all changes.')) {
+                    localStorage.removeItem('vibe_mmo_map');
+                    window.location.reload();
+                  }
+                }}
+                className="flex-1 h-10 rounded-xl bg-[#fd9a00]/10 border border-[#fd9a00]/20 flex items-center justify-center hover:bg-[#fd9a00]/30 hover:border-[#fd9a00]/50 transition-all text-[10px] font-bold text-[#fd9a00] uppercase"
+              >
+                Reset
               </button>
             </div>
           </div>

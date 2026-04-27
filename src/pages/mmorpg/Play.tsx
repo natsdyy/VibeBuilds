@@ -60,7 +60,13 @@ const Play: React.FC = () => {
   useEffect(() => {
     const saved = localStorage.getItem('vibe_mmo_map');
     if (saved) {
-      try { setMapFeatures(JSON.parse(saved)); return; } catch (e) { console.error(e); }
+      try { 
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.length > 0) {
+          setMapFeatures(parsed); 
+          return; 
+        }
+      } catch (e) { console.error(e); }
     }
 
     const features: MapFeature[] = [];
