@@ -15,6 +15,9 @@ import InventoryDemo from './pages/labs/InventoryDemo';
 import EcommerceDemo from './pages/labs/EcommerceDemo';
 import BotDemo from './pages/labs/BotDemo';
 import AttendanceDemo from './pages/labs/AttendanceDemo';
+import POSDemo from './pages/labs/POSDemo';
+import BookingDemo from './pages/labs/BookingDemo';
+import HRDemo from './pages/labs/HRDemo';
 import MMOCreator from './pages/labs/MMOCreator';
 import ProductConfigurator from './pages/labs/ProductConfigurator';
 import SmartCheckout from './pages/labs/SmartCheckout';
@@ -98,6 +101,9 @@ return (
             <Route path="/labs/ecommerce" element={<EcommerceDemo />} />
             <Route path="/labs/bot" element={<BotDemo />} />
             <Route path="/labs/attendance" element={<AttendanceDemo />} />
+            <Route path="/labs/pos" element={<POSDemo />} />
+            <Route path="/labs/booking" element={<BookingDemo />} />
+            <Route path="/labs/hr" element={<HRDemo />} />
             <Route path="/labs/mmo-creator" element={<MMOCreator />} />
             <Route path="/labs/configurator" element={<ProductConfigurator />} />
             <Route path="/labs/checkout" element={<SmartCheckout />} />
