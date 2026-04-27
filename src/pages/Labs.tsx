@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Beaker, BarChart3, Database, Gamepad2, ArrowRight, Box, ShoppingCart, Sword, LayoutGrid, MessageSquare, Users } from 'lucide-react';
+import { Beaker, BarChart3, Database, Gamepad2, ArrowRight, Box, ShoppingCart, Sword, LayoutGrid, MessageSquare, Users, Clock } from 'lucide-react';
 
 import { Link } from 'react-router-dom';
 import Header from '../components/ui/Header';
@@ -61,6 +61,16 @@ const Labs: React.FC = () => {
       path: '/labs/bot',
       color: 'from-blue-600 to-cyan-500',
       status: 'Bot Sample',
+      category: 'systems'
+    },
+    {
+      id: 'attendance',
+      title: t('labs.attendance.title'),
+      description: t('labs.attendance.desc'),
+      icon: <Clock className="w-8 h-8" />,
+      path: '/labs/attendance',
+      color: 'from-emerald-600 to-teal-500',
+      status: 'Workforce Sample',
       category: 'systems'
     },
     {

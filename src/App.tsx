@@ -14,6 +14,7 @@ import GameLab from './pages/labs/GameLab';
 import InventoryDemo from './pages/labs/InventoryDemo';
 import EcommerceDemo from './pages/labs/EcommerceDemo';
 import BotDemo from './pages/labs/BotDemo';
+import AttendanceDemo from './pages/labs/AttendanceDemo';
 import MMOCreator from './pages/labs/MMOCreator';
 import MMORPGLanding from './pages/mmorpg/Landing';
 import MMORPGPlay from './pages/mmorpg/Play';
@@ -94,6 +95,7 @@ return (
             <Route path="/labs/inventory" element={<InventoryDemo />} />
             <Route path="/labs/ecommerce" element={<EcommerceDemo />} />
             <Route path="/labs/bot" element={<BotDemo />} />
+            <Route path="/labs/attendance" element={<AttendanceDemo />} />
             <Route path="/labs/mmo-creator" element={<MMOCreator />} />
             <Route path="/mmorpg" element={<MMORPGLanding />} />
             <Route path="/mmorpg/play" element={<MMORPGPlay />} />
