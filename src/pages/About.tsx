@@ -14,11 +14,11 @@ import john from '../assets/OurTeam/JohnMarcoPaja.png'
 import patrick from '../assets/OurTeam/PatrickMirhan.png'
 
 const team = [
-  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20" },
-  { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20" },
-  { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20" },
-  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20" },
-  { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20" },
+  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20", available: false },
+  { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20", available: true },
+  { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20", available: true },
+  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20", available: true },
+  { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20", available: true },
 ]
 
 const About: React.FC = () => {
@@ -31,8 +31,8 @@ const About: React.FC = () => {
       <main className="pt-40 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="mb-24 text-center">
-            <BlurText 
-              text={t('about.title')} 
+            <BlurText
+              text={t('about.title')}
               delay={100}
               animateBy="words"
               className="text-5xl md:text-8xl font-black tracking-tighter text-foreground leading-tight justify-center mb-8"
@@ -42,47 +42,65 @@ const About: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative h-[500px] overflow-hidden rounded-[40px] bg-foreground/[0.03] border border-foreground/5"
-              >
-                {/* Image Container */}
-                <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  />
-                  {/* Gradient Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity`} />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${member.color} to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
-                </div>
-
-                {/* Content Overlay */}
-                <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                  <motion.div 
-                    initial={{ y: 20, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ delay: i * 0.1 + 0.3 }}
+          <div className="overflow-x-auto">
+            <motion.table
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full border-collapse"
+            >
+              <thead>
+                <tr className="border-b border-foreground/10">
+                  <th className="px-6 py-8 text-left text-[10px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Member</th>
+                  <th className="px-6 py-8 text-left text-[10px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Role</th>
+                  <th className="px-6 py-8 text-right text-[10px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {team.map((member, i) => (
+                  <motion.tr
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="group border-b border-foreground/5 hover:bg-foreground/[0.02] transition-colors"
                   >
-                    <p className="text-[10px] font-black tracking-[0.3em] text-[#fd9a00] uppercase mb-3 drop-shadow-lg">Team Member</p>
-                    <h3 className="text-3xl md:text-4xl font-black text-white tracking-tighter mb-1 drop-shadow-2xl">{member.name}</h3>
-                    <p className="text-white/90 font-bold text-lg tracking-tight opacity-100 transition-all duration-500">{member.role}</p>
-                  </motion.div>
-                </div>
-
-                {/* Corner Accent */}
-                <div className="absolute top-8 right-8 w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                  <div className="w-2 h-2 rounded-full bg-[#fd9a00] animate-pulse" />
-                </div>
-              </motion.div>
-            ))}
+                    <td className="px-6 py-8">
+                      <div className="flex items-center gap-6">
+                        <div className="relative w-20 h-20 shrink-0 rounded-2xl overflow-hidden border border-foreground/10 group-hover:border-[#fd9a00]/50 transition-colors">
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-black tracking-tight text-foreground">{member.name}</h3>
+                          <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Programmer 0{i + 1}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-8">
+                      <p className="text-lg font-bold text-foreground tracking-tight">{member.role}</p>
+                    </td>
+                    <td className="px-6 py-8 text-right">
+                      {member.available ? (
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[10px] font-black uppercase tracking-widest">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          Available
+                        </div>
+                      ) : (
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[10px] font-black uppercase tracking-widest">
+                          <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          On Job
+                        </div>
+                      )}
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </motion.table>
           </div>
         </div>
       </main>

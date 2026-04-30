@@ -19,6 +19,13 @@ import ddc from '../assets/MobileProjects/DDC.png'
 import aspire from '../assets/MobileProjects/AspireQueueing.png'
 import portfolio from '../assets/MobileProjects/Portfolio.png'
 
+// Import Team Images
+import cedric from '../assets/OurTeam/CedricBelisario.png'
+import nathaniel from '../assets/OurTeam/NathanielVasquez.png'
+import charles from '../assets/OurTeam/CharlesAlvaran.png'
+import john from '../assets/OurTeam/JohnMarcoPaja.png'
+import patrick from '../assets/OurTeam/PatrickMirhan.png'
+
 const projects = [
   { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-[#fd9a00] to-indigo-600" },
   { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
@@ -26,6 +33,14 @@ const projects = [
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
   { name: "Aspire", image: aspire, category: "Healthcare System", color: "from-blue-500 to-cyan-600" },
   { name: "Portfolio", image: portfolio, category: "Personal Brand", color: "from-violet-500 to-fuchsia-600" },
+]
+
+const team = [
+  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20", available: false },
+  { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20", available: true },
+  { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20", available: true },
+  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20", available: true },
+  { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20", available: true },
 ]
 
 const Home: React.FC = () => {
@@ -47,27 +62,25 @@ const Home: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-foreground/5 border border-foreground/10 text-[var(--text-muted)] text-[10px] font-bold tracking-[0.2em] uppercase mb-10 shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-foreground/5 border border-foreground/10 text-[var(--text-muted)] text-[10px] font-black tracking-[0.2em] uppercase mb-10 shadow-sm"
           >
-            <ShinyText text="The Future of Digital Building" speed={4} className="text-[var(--text-muted)]" />
+            <ShinyText text="VibeBuilds — Digital Programmers & Creative Engineers" speed={4} className="text-[var(--text-muted)]" />
           </motion.div>
           
           <div className="mb-8">
-            <BlurText 
-              text={t('hero.title')} 
-              delay={100}
-              animateBy="words"
-              className="text-6xl md:text-8xl font-black tracking-tight text-foreground leading-tight justify-center"
-            />
+            <h1 className="text-6xl md:text-[100px] font-black tracking-tighter text-foreground leading-[0.85] justify-center">
+              WE BUILD <br/>
+              <span className="text-[#fd9a00]">ELITE SYSTEMS</span>
+            </h1>
           </div>
           
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="text-lg md:text-xl text-[var(--text-muted)] mb-12 leading-relaxed max-w-2xl font-medium"
+            className="text-lg md:text-2xl text-[var(--text-muted)] mb-12 leading-relaxed max-w-3xl font-bold tracking-tight"
           >
-            {t('hero.sub')}
+            Currently accepting high-impact projects and partnerships. We turn complex digital visions into high-performance reality.
           </motion.p>
 
           <motion.div 
@@ -76,14 +89,14 @@ const Home: React.FC = () => {
             transition={{ delay: 1 }}
             className="flex flex-col sm:flex-row items-center gap-6"
           >
-            <Link to="/contact">
-              <button className="px-10 py-4 rounded-2xl bg-foreground text-background font-black text-sm tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-2xl">
-                {t('hero.getStarted')}
+            <Link to="/about">
+              <button className="group flex items-center gap-3 px-10 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-sm tracking-widest hover:scale-105 transition-all active:scale-95 shadow-2xl shadow-[#fd9a00]/20">
+                HIRE THE TEAM <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link to="/projects">
-              <button className="px-10 py-4 rounded-2xl bg-foreground/5 border border-foreground/10 text-foreground font-black text-sm tracking-widest hover:bg-foreground/10 transition-all active:scale-95">
-                {t('hero.ourWork')}
+              <button className="px-10 py-5 rounded-2xl bg-foreground/5 border border-foreground/10 text-foreground font-black text-sm tracking-widest hover:bg-foreground/10 transition-all active:scale-95">
+                OUR CASE STUDIES
               </button>
             </Link>
           </motion.div>
@@ -240,51 +253,98 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Services/About Section Placeholder */}
+      {/* Team & Vision Section */}
       <section className="py-32 px-6 max-w-7xl mx-auto" id="about">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">Built for <span className="text-[#fd9a00]">Performance</span></h2>
-          <p className="text-[var(--text-muted)] text-xl max-w-2xl mx-auto font-medium mb-10">We don't just build websites; we engineer digital experiences that push the boundaries of what's possible on the web.</p>
-          <Link to="/about">
-            <button className="px-8 py-3 rounded-xl bg-[#fd9a00] text-white font-black text-xs tracking-[0.2em] uppercase hover:bg-orange-500 transition-all active:scale-95 shadow-xl shadow-[#fd9a00]/20">
-              Meet The Team
-            </button>
-          </Link>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Full-Stack Dev",
-              desc: "From backend architecture to frontend polish, we handle it all with precision.",
-              icon: <Laptop className="w-6 h-6" />
-            },
-            {
-              title: "UI/UX Strategy",
-              desc: "User-centric design that doesn't just look good, but works perfectly.",
-              icon: <Zap className="w-6 h-6" />
-            },
-            {
-              title: "Cloud Native",
-              desc: "Scalable infrastructure setup using the latest cloud technologies.",
-              icon: <Globe className="w-6 h-6" />
-            }
-          ].map((service, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
-              className="p-10 rounded-[32px] border border-[var(--border)] bg-foreground/[0.02] backdrop-blur-md hover:border-[#fd9a00]/30 transition-all group"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-[#fd9a00]/10 text-[#fd9a00] flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#fd9a00] group-hover:text-white transition-all duration-500 shadow-lg shadow-[#fd9a00]/10">
-                {service.icon}
+        <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
+          <div className="lg:w-1/2">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[10px] font-black tracking-widest uppercase mb-8">
+              The Collective
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Meet the <br/><span className="text-[#fd9a00]">Programmers</span></h2>
+            <p className="text-[var(--text-muted)] text-xl mb-12 max-w-xl font-medium leading-relaxed">
+              VibeBuilds is a focused collective of elite developers and designers. We don't just build products; we engineer digital legacies for forward-thinking clients.
+            </p>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">100%</h4>
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Commitment</p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 tracking-tight">{service.title}</h3>
-              <p className="text-[var(--text-muted)] leading-relaxed text-lg font-medium">{service.desc}</p>
-            </motion.div>
-          ))}
+              <div>
+                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">24/7</h4>
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Innovation</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="lg:w-1/2 overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b border-foreground/10">
+                  <th className="pb-4 text-left text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Member</th>
+                  <th className="pb-4 text-right text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                {team.map((member, i) => (
+                  <tr key={i} className="group border-b border-foreground/5 hover:bg-foreground/[0.02] transition-colors">
+                    <td className="py-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-foreground/10 group-hover:border-[#fd9a00]/50 transition-colors">
+                          <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                        </div>
+                        <p className="text-sm font-black tracking-tight text-foreground">{member.name}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 text-right">
+                      <div className="flex flex-col items-end gap-1">
+                        <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-tighter">{member.role}</p>
+                        <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[6px] font-black uppercase tracking-widest ${
+                          member.available 
+                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' 
+                            : 'bg-amber-500/10 border-amber-500/20 text-amber-500'
+                        }`}>
+                          <div className={`w-1 h-1 rounded-full ${member.available ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+                          {member.available ? 'Available' : 'On Job'}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td colSpan={2} className="pt-6">
+                    <Link to="/contact" className="flex items-center justify-between p-4 rounded-2xl border-2 border-dashed border-[#fd9a00]/30 hover:bg-[#fd9a00]/5 transition-all group">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#fd9a00]">Join The Collective</p>
+                      <ArrowRight className="w-4 h-4 text-[#fd9a00] group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Global Vision Banner */}
+        <div className="relative rounded-[48px] bg-foreground text-background p-12 md:p-24 overflow-hidden text-center">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#fd9a00]/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative z-10"
+          >
+            <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-8 leading-tight">
+              WE ARE LOOKING FOR <br/>
+              <span className="text-[#fd9a00]">CLIENTS & CHALLENGES</span>
+            </h2>
+            <p className="text-lg md:text-xl text-background/60 mb-12 max-w-2xl mx-auto font-medium">
+              Whether you're a startup looking to disrupt or an enterprise aiming to evolve, we have the engineering power to take you there.
+            </p>
+            <Link to="/contact">
+              <button className="px-12 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-sm tracking-widest hover:scale-105 transition-all shadow-2xl">
+                START A DISCOVERY SESSION
+              </button>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
