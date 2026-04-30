@@ -16,6 +16,8 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
   const [isVerifying, setIsVerifying] = useState(false)
   const [formData, setFormData] = useState({
     type: '',
+    identity: '',
+    otherIdentity: '',
     budget: '',
     otherBudget: '',
     name: '',
@@ -96,6 +98,13 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
     { id: 'design', label: 'UI/UX Design', icon: <Palette /> },
   ]
 
+  const identities = [
+    { id: 'client', label: 'Private Client' },
+    { id: 'company', label: 'Company / Startup' },
+    { id: 'student', label: 'Student' },
+    { id: 'other', label: 'Other / Specify' },
+  ]
+
   const budgetRanges = [
     { id: 'academic', label: '₱2,000 - ₱10,000 (Academic)' },
     { id: 'basic', label: '₱20k - ₱145k' },
@@ -110,7 +119,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
       setTimeout(() => {
         setStep(1)
         setIsSubmitted(false)
-        setFormData({ type: '', budget: '', name: '', email: '', message: '' })
+        setFormData({ type: '', identity: '', otherIdentity: '', budget: '', otherBudget: '', name: '', email: '', message: '', hp: '' })
       }, 300)
     }
   }, [isOpen])
@@ -148,12 +157,12 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                 <>
                   <div className="mb-10">
                     <div className="flex justify-between text-[10px] font-black tracking-widest uppercase text-[#fd9a00] mb-3 pr-12">
-                      <span>Step {step} of 3</span>
+                      <span>Step {step} of 4</span>
                       <span>Discovery Phase</span>
                     </div>
                     <div className="h-1 w-full bg-foreground/5 rounded-full overflow-hidden">
                       <motion.div 
-                        animate={{ width: `${(step / 3) * 100}%` }}
+                        animate={{ width: `${(step / 4) * 100}%` }}
                         className="h-full bg-[#fd9a00]"
                       />
                     </div>
@@ -166,7 +175,7 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="min-h-[300px]"
+                        className="min-h-[350px]"
                       >
                         <h2 className="text-3xl font-black mb-8 tracking-tight">What's the vision?</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -196,7 +205,57 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="min-h-[300px]"
+                        className="min-h-[350px]"
+                      >
+                        <h2 className="text-3xl font-black mb-8 tracking-tight">I am a...</h2>
+                        <div className="grid grid-cols-1 gap-4">
+                          {identities.map((identity) => (
+                            <div key={identity.id} className="space-y-4">
+                              <button
+                                onClick={() => setFormData({ ...formData, identity: identity.label })}
+                                className={`w-full p-6 rounded-2xl border flex items-center justify-between transition-all cursor-pointer ${
+                                  formData.identity === identity.label 
+                                    ? 'border-[#fd9a00] bg-[#fd9a00]/10 text-[#fd9a00]' 
+                                    : 'border-foreground/5 bg-foreground/[0.02] hover:border-foreground/20'
+                                }`}
+                              >
+                                <span className="font-bold text-lg">{identity.label}</span>
+                                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                                  formData.identity === identity.label ? 'border-[#fd9a00] bg-[#fd9a00]' : 'border-foreground/20'
+                                }`}>
+                                  {formData.identity === identity.label && <CheckCircle2 className="w-4 h-4 text-white" />}
+                                </div>
+                              </button>
+                              
+                              {identity.id === 'other' && formData.identity === 'Other / Specify' && (
+                                <motion.div
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'auto' }}
+                                  className="px-2 pb-2"
+                                >
+                                  <input 
+                                    type="text" 
+                                    placeholder="Please specify (e.g. Non-profit, Freelancer)"
+                                    value={formData.otherIdentity}
+                                    onChange={(e) => setFormData({ ...formData, otherIdentity: e.target.value })}
+                                    className="w-full px-6 py-4 rounded-2xl bg-foreground/5 border border-[#fd9a00]/30 focus:border-[#fd9a00] focus:outline-none placeholder:text-foreground/30 font-medium"
+                                    autoFocus
+                                  />
+                                </motion.div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {step === 3 && (
+                      <motion.div
+                        key="step3"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        className="min-h-[350px]"
                       >
                         <h2 className="text-3xl font-black mb-8 tracking-tight">Budget range?</h2>
                         <div className="grid grid-cols-1 gap-4">
@@ -240,13 +299,13 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                       </motion.div>
                     )}
 
-                    {step === 3 && (
+                    {step === 4 && (
                       <motion.div
-                        key="step3"
+                        key="step4"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        className="min-h-[300px] space-y-6"
+                        className="min-h-[350px] space-y-6"
                       >
                         <h2 className="text-3xl font-black mb-8 tracking-tight">Who are you?</h2>
                         <div className="space-y-4">
@@ -302,11 +361,12 @@ const DiscoveryModal: FC<DiscoveryModalProps> = ({ isOpen, onClose }) => {
                         <ArrowLeft className="w-4 h-4" /> <span className="hidden sm:inline">BACK</span>
                       </button>
                     )}
-                    {step < 3 ? (
+                    {step < 4 ? (
                       <button 
                         disabled={
                           step === 1 ? !formData.type : 
-                          step === 2 ? (!formData.budget || (formData.budget === 'Custom / Specify' && !formData.otherBudget)) :
+                          step === 2 ? (!formData.identity || (formData.identity === 'Other / Specify' && !formData.otherIdentity)) :
+                          step === 3 ? (!formData.budget || (formData.budget === 'Custom / Specify' && !formData.otherBudget)) :
                           false
                         }
                         onClick={handleNext}
