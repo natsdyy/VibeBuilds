@@ -3,6 +3,11 @@ import { Message, ChatHandle, ChatAction } from './types';
 
 const defaultHandles: ChatHandle[] = [
   {
+    pattern: ['vibebuilds', 'vibe builds', 'who are you', 'company', 'agency'],
+    response: "Hi! We're VibeBuilds—a group of skilled developers who love building apps, websites, and systems that help businesses grow. We're currently looking for new clients and companies who need high-quality digital tools built specifically for their needs.\n\nWhether you need a custom system to run your business or a beautiful app to connect with customers, we're here to turn your vision into reality. We make the technology part easy so you can focus on your business!",
+    action: { label: 'Talk to Us', path: '/contact' }
+  },
+  {
     pattern: ['price', 'pricing', 'cost'],
     response: "Our development rates are tailored to your needs. Basic projects start at ₱2,000, while complex enterprise systems are quoted after a discovery session.",
     action: { label: 'View Pricing', path: '/services' }
@@ -27,11 +32,6 @@ const defaultHandles: ChatHandle[] = [
     action: { label: 'View Projects', path: '/projects' }
   },
   {
-    pattern: ['team', 'who', 'programmers', 'members'],
-    response: "VibeBuilds is powered by an elite collective of 5 core programmers:\n\n• Cedric Belisario — Fullstack & Game Expert\n• Nathaniel Vasquez — Strategic Fullstack Dev\n• Charles Alvaran — Versatile Fullstack Dev\n• John Marco Paja — Frontend Specialist\n• Patrick Mirhan — PM & Frontend Dev\n\nYou can ask me about any specific member for more details!",
-    action: { label: 'Meet the Team', path: '/about' }
-  },
-  {
     pattern: ['charles', 'alvaran'],
     response: "Charles Alvaran is a Versatile Fullstack Developer. He focuses on creating seamless user interfaces and robust backend integrations. He is currently available for new projects!",
     action: { label: 'View Charles Resume', path: '/assets/mmo/ismeye\'s/Resume/Resume - Charles Louie Alvaran.pdf' }
@@ -47,7 +47,12 @@ const defaultHandles: ChatHandle[] = [
     action: { label: 'Go to About', path: '/about' }
   },
   {
-    pattern: ['how to use', 'guide', 'help', 'instructions', 'bot','paano'],
+    pattern: ['team', 'who', 'programmers', 'members', 'staff'],
+    response: "VibeBuilds is powered by an elite collective of 5 core programmers:\n\n• Cedric Belisario — Fullstack & Game Expert\n• Nathaniel Vasquez — Strategic Fullstack Dev\n• Charles Alvaran — Versatile Fullstack Dev\n• John Marco Paja — Frontend Specialist\n• Patrick Mirhan — PM & Frontend Dev\n\nYou can ask me about any specific member for more details!",
+    action: { label: 'Meet the Team', path: '/about' }
+  },
+  {
+    pattern: ['how to use', 'guide', 'help', 'instructions', 'bot', 'paano', 'tutorial'],
     response: "I'm your VibeBuilds navigator! You can:\n\n1. Type keywords like 'pricing' or 'projects'.\n2. Ask about specific team members (e.g., 'Who is Charles?').\n3. Use the quick-suggestion buttons at the bottom.\n4. Ask for contact info if you're ready to start a project!",
   },
 ];
