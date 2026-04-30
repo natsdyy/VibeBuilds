@@ -14,10 +14,10 @@ import john from '../assets/OurTeam/JohnMarcoPaja.png'
 import patrick from '../assets/OurTeam/PatrickMirhan.png'
 
 const team = [
-  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20", available: false },
+  { name: "Cedric Belisario", role: "Fullstack Developer/Game Developer", image: cedric, color: "from-[#fd9a00]/20", available: false },
   { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20", available: true },
   { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20", available: true },
-  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20", available: true },
+  { name: "John Marco Paja", role: "Front end developer/Technical Support", image: john, color: "from-emerald-500/20", available: true },
   { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20", available: true },
 ]
 

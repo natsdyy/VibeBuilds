@@ -12,7 +12,7 @@ export default async function handler(req: any, res: any) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, type, budget, otherBudget, message } = req.body;
+  const { name, email, type, identity, otherIdentity, budget, otherBudget, message } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ error: 'Name and email are required' });
@@ -29,6 +29,7 @@ export default async function handler(req: any, res: any) {
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Project Type:</strong> ${type}</p>
+          <p><strong>Identity:</strong> ${identity === 'Other / Specify' ? otherIdentity : identity}</p>
           <p><strong>Budget:</strong> ${budget === 'Custom / Specify' ? otherBudget : budget}</p>
           <hr />
           <p><strong>Vision / Message:</strong></p>
