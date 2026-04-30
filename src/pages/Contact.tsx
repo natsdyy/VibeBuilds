@@ -45,43 +45,37 @@ const Contact: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-2">Email Us</h3>
                   <p className="text-[var(--text-muted)] text-lg">vibebuilds.business@gmail.com</p>
+                  <p className="text-[var(--text-muted)] text-lg">charleslouiealvaran@gmail.com</p>
                   <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Response within 24h</p>
-                </div>
-              </div>
-
-              <div className="flex gap-8 items-start group">
-                <div className="w-16 h-16 rounded-[24px] bg-[#fd9a00]/10 text-[#fd9a00] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#fd9a00] group-hover:text-white transition-all duration-500 shadow-xl shadow-[#fd9a00]/5">
-                  <MessageSquare className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Live Chat</h3>
-                  <p className="text-[var(--text-muted)] text-lg">Available Mon-Fri, 9am-6pm</p>
-                  <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Immediate Support</p>
                 </div>
               </div>
 
               <div className="pt-8 border-t border-[var(--border)]">
                 <h3 className="text-xs font-black tracking-[0.3em] text-foreground uppercase mb-8">Social Channels</h3>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                   {[
-                    { domain: 'facebook.com', href: 'https://www.facebook.com/profile.php?id=61588893476661', label: 'Facebook' },
-                    { domain: 'discord.com', href: 'https://discord.gg/prVnHEmgZV', label: 'Discord' },
-                    { domain: 'telegram.org', href: 'https://t.me/DynMovies', label: 'Telegram' },
+                    { domain: 'facebook.com', href: 'https://www.facebook.com/CharlesLouieAlvaran/', label: 'Facebook' },
+                    { domain: 'instagram.com', href: 'https://www.instagram.com/natsdyyy/', label: 'Instagram' },
+                    { domain: 'telegram.org', href: 'https://t.me/NatsDyn', label: 'Telegram' },
+                    { domain: 'discord.com', href: 'https://discordapp.com/users/natsdy', label: 'Discord', text: '@natsdy' },
                   ].map((social, i) => (
                     <motion.a
                       key={i}
                       href={social.href}
                       target="_blank"
                       rel="noreferrer"
-                      whileHover={{ y: -4, scale: 1.1 }}
+                      whileHover={{ y: -4, scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-14 h-14 rounded-2xl bg-foreground/5 border border-foreground/10 flex items-center justify-center grayscale hover:grayscale-0 hover:bg-[#fd9a00]/10 hover:border-[#fd9a00]/30 transition-all duration-300 group/social"
+                      className="px-6 h-14 rounded-2xl bg-foreground/5 border border-foreground/10 flex items-center gap-3 grayscale hover:grayscale-0 hover:bg-[#fd9a00]/10 hover:border-[#fd9a00]/30 transition-all duration-300 group/social"
                     >
                       <img 
                         src={`https://www.google.com/s2/favicons?sz=64&domain=${social.domain}`} 
-                        className="w-6 h-6" 
+                        className="w-5 h-5" 
                         alt={social.label} 
                       />
+                      <span className="text-[10px] font-black uppercase tracking-widest text-foreground group-hover/social:text-[#fd9a00] transition-colors">
+                        {social.label}
+                      </span>
                     </motion.a>
                   ))}
                 </div>

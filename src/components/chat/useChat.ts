@@ -14,8 +14,8 @@ const defaultHandles: ChatHandle[] = [
   },
   {
     pattern: ['contact', 'hire', 'reach'],
-    response: "You can reach our lead programmer directly through the 'Contact' page, or fill out the Discovery Modal on the home screen. We usually respond within 24 hours!",
-    action: { label: 'Get Started', path: '/contact' }
+    response: "You can reach us through the following channels:\n\n• Gmail: vibebuilds.business@gmail.com / charleslouiealvaran@gmail.com\n• Facebook: facebook.com/CharlesLouieAlvaran/\n• Instagram: instagram.com/natsdyyy/\n• Telegram: t.me/NatsDyn\n• Discord: @natsdy\n\nOr fill out the Discovery Modal on the home screen!",
+    action: { label: 'Go to Contact', path: '/contact' }
   },
   {
     pattern: ['hello', 'hi', 'hey','hey there','hi there','hello there','Good morning','Good afternoon','Good evening','Good night','Good day', 'kamusta', 'Kumusta'],
