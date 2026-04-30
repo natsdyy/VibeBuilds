@@ -27,14 +27,29 @@ const defaultHandles: ChatHandle[] = [
     action: { label: 'View Projects', path: '/projects' }
   },
   {
-    pattern: ['team', 'who'],
-    response: "VibeBuilds is powered by a elite team of digital programmers:\n\n• Cedric Belisario — Fullstack Developer (Currently on a project)\n• Nathaniel Vasquez — Fullstack Developer\n• Charles Alvaran — Fullstack Developer\n• John Marco Paja — Front end Developer\n• Patrick Mirhan — Front end Developer / Project Manager",
+    pattern: ['team', 'who', 'programmers', 'members'],
+    response: "VibeBuilds is powered by an elite collective of 5 core programmers:\n\n• Cedric Belisario — Fullstack & Game Expert\n• Nathaniel Vasquez — Strategic Fullstack Dev\n• Charles Alvaran — Versatile Fullstack Dev\n• John Marco Paja — Frontend Specialist\n• Patrick Mirhan — PM & Frontend Dev\n\nYou can ask me about any specific member for more details!",
     action: { label: 'Meet the Team', path: '/about' }
   },
   {
-    pattern: ['status'],
-    response: "Systems are nominal. 🟢 All engines running at peak performance. Ready for your next big idea!"
-  }
+    pattern: ['charles', 'alvaran'],
+    response: "Charles Alvaran is a Versatile Fullstack Developer. He focuses on creating seamless user interfaces and robust backend integrations. He is currently available for new projects!",
+    action: { label: 'View Charles Resume', path: '/assets/mmo/ismeye\'s/Resume/Resume - Charles Louie Alvaran.pdf' }
+  },
+  {
+    pattern: ['john', 'marco', 'paja'],
+    response: "John Marco Paja is our Creative Frontend Specialist. He has a keen eye for detail and ensures every user interaction is smooth and purposeful. You can check his resume for his full technical stack!",
+    action: { label: 'View John\'s Resume', path: '/assets/mmo/ismeye\'s/Resume/Resume - John Marco Paja.pdf' }
+  },
+  {
+    pattern: ['cedric', 'nathaniel', 'patrick'],
+    response: "They are core members of the VibeBuilds elite collective. Each brings years of expertise in Fullstack development and Project Management. We are currently preparing their full interactive resumes!",
+    action: { label: 'Go to About', path: '/about' }
+  },
+  {
+    pattern: ['how to use', 'guide', 'help', 'instructions', 'bot','paano'],
+    response: "I'm your VibeBuilds navigator! You can:\n\n1. Type keywords like 'pricing' or 'projects'.\n2. Ask about specific team members (e.g., 'Who is Charles?').\n3. Use the quick-suggestion buttons at the bottom.\n4. Ask for contact info if you're ready to start a project!",
+  },
 ];
 
 export const useChat = (initialMessage: string = "Hello! How can I help you today?") => {
