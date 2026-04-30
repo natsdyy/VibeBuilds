@@ -10,6 +10,7 @@ import ShinyText from '../components/animations/ShinyText'
 import BlurText from '../components/animations/BlurText'
 import CardSwap, { Card } from '../components/animations/CardSwap'
 import { useLanguage } from '../context/LanguageContext'
+import ProgrammerModal from '../components/ui/ProgrammerModal'
 
 // Import Mobile Project Assets
 import dynmovs from '../assets/MobileProjects/Dynmovs.png'
@@ -36,16 +37,63 @@ const projects = [
 ]
 
 const team = [
-  { name: "Cedric Belisario", role: "Fullstack Developer", image: cedric, color: "from-[#fd9a00]/20", available: false },
-  { name: "Nathaniel Vasquez", role: "Fullstack Developer", image: nathaniel, color: "from-blue-500/20", available: true },
-  { name: "Charles Alvaran", role: "Fullstack Developer", image: charles, color: "from-[#fd9a00]/20", available: true },
-  { name: "John Marco Paja", role: "Front end developer", image: john, color: "from-emerald-500/20", available: true },
-  { name: "Patrick Mirhan", role: "Front end developer / Project manager", image: patrick, color: "from-amber-500/20", available: true },
+  { 
+    name: "Cedric Belisario", 
+    role: "Fullstack Developer", 
+    image: cedric, 
+    color: "from-[#fd9a00]/20", 
+    available: false, 
+    resume: null,
+    summary: "Expert Fullstack & Game Developer with a passion for building immersive digital experiences and high-performance systems. Cedric specializes in complex logic and creative engineering."
+  },
+  { 
+    name: "Nathaniel Vasquez", 
+    role: "Fullstack Developer", 
+    image: nathaniel, 
+    color: "from-blue-500/20", 
+    available: true, 
+    resume: null,
+    summary: "Strategic Fullstack Developer specializing in scalable web architectures and modern frontend frameworks. Nathaniel excels at turning business requirements into elegant code."
+  },
+  { 
+    name: "Charles Alvaran", 
+    role: "Fullstack Developer", 
+    image: charles, 
+    color: "from-[#fd9a00]/20", 
+    available: true, 
+    resume: "/assets/mmo/ismeye's/Resume/Resume - Charles Louie Alvaran.pdf",
+    summary: "Versatile Fullstack Developer focused on creating seamless user interfaces and robust backend integrations. Charles brings a balanced perspective to every project he leads."
+  },
+  { 
+    name: "John Marco Paja", 
+    role: "Front end developer", 
+    image: john, 
+    color: "from-emerald-500/20", 
+    available: true, 
+    resume: "/assets/mmo/ismeye's/Resume/Resume - John Marco Paja.pdf",
+    summary: "Creative Frontend Developer and Technical Support specialist with a keen eye for detail and user-centric design. John ensures every interaction is smooth and purposeful."
+  },
+  { 
+    name: "Patrick Mirhan", 
+    role: "Front end developer / Project manager", 
+    image: patrick, 
+    color: "from-amber-500/20", 
+    available: true, 
+    resume: null,
+    summary: "Efficient Frontend Developer and Project Manager dedicated to delivering high-quality projects on time. Patrick bridges the gap between client vision and technical execution."
+  },
 ]
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const [selectedMember, setSelectedMember] = React.useState<typeof team[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const openMemberModal = (member: typeof team[0]) => {
+    setSelectedMember(member);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-[#fd9a00]/30 overflow-x-hidden transition-colors duration-300">
@@ -74,14 +122,19 @@ const Home: React.FC = () => {
             </h1>
           </div>
           
-          <motion.p 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="text-lg md:text-2xl text-[var(--text-muted)] mb-12 leading-relaxed max-w-3xl font-bold tracking-tight"
+            className="space-y-4 max-w-3xl mb-12"
           >
-            Currently accepting high-impact projects and partnerships. We turn complex digital visions into high-performance reality.
-          </motion.p>
+            <p className="text-xl md:text-3xl text-foreground font-black tracking-tight">
+              We are open to new projects and partnerships.
+            </p>
+            <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed font-medium">
+              Our portfolio shows the work we’ve done, and we’re ready to help companies bring their ideas to life. We turn digital concepts into real, high-performing solutions that make an impact.
+            </p>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -100,6 +153,80 @@ const Home: React.FC = () => {
               </button>
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Team & Vision Section */}
+      <section className="py-32 px-6 max-w-7xl mx-auto" id="about">
+        <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
+          <div className="lg:w-1/2">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[10px] font-black tracking-widest uppercase mb-8">
+              The Collective
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Meet the <br/><span className="text-[#fd9a00]">Programmers</span></h2>
+            <p className="text-[var(--text-muted)] text-xl mb-12 max-w-xl font-medium leading-relaxed">
+              VibeBuilds is a focused collective of elite developers and designers. We don't just build products; we engineer digital legacies for forward-thinking clients.
+            </p>
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">100%</h4>
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Commitment</p>
+              </div>
+              <div>
+                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">24/7</h4>
+                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Innovation</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="lg:w-1/2 overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b border-foreground/10">
+                  <th className="pb-4 text-left text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Member</th>
+                  <th className="pb-4 text-right text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                {team.filter(m => m.resume).map((member, i) => (
+                  <tr key={i} className="group border-b border-foreground/5 hover:bg-foreground/[0.02] transition-colors">
+                    <td className="py-4">
+                      <button 
+                        onClick={() => openMemberModal(member)}
+                        className="flex items-center gap-4 text-left hover:opacity-70 transition-opacity w-full"
+                      >
+                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-foreground/10 group-hover:border-[#fd9a00]/50 transition-colors">
+                          <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                        </div>
+                        <p className="text-sm font-black tracking-tight text-foreground">
+                          {member.name} 
+                          <span className="text-[8px] font-black uppercase text-[#fd9a00] opacity-0 group-hover:opacity-100 transition-opacity ml-2">View Profile</span>
+                        </p>
+                      </button>
+                    </td>
+                    <td className="py-4 text-right">
+                      <div className="flex flex-col items-end gap-1">
+                        <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-tighter">{member.role}</p>
+                        <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[6px] font-black uppercase tracking-widest ${
+                          member.available 
+                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' 
+                            : 'bg-amber-500/10 border-amber-500/20 text-amber-500'
+                        }`}>
+                          <div className={`w-1 h-1 rounded-full ${member.available ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+                          {member.available ? 'Available' : 'On Job'}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-8 flex justify-end">
+              <Link to="/about" className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#fd9a00] hover:opacity-70 transition-all">
+                View Full Team Directory <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -171,185 +298,13 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Services Section */}
-      <section className="py-32 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[10px] font-black tracking-widest uppercase mb-8">
-              The VibeBuilds Way
-            </div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Our Engineering <br/><span className="text-[#fd9a00]">Process</span></h2>
-            <p className="text-[var(--text-muted)] text-xl mb-12 max-w-xl font-medium leading-relaxed">
-              We don't just write code; we architect solutions. Our phased approach ensures every project is built for maximum impact and infinite scalability.
-            </p>
-            
-            <div className="space-y-6">
-              {[
-                "Bulletproof Digital Strategy",
-                "Immersive UI/UX Design",
-                "High-Performance Development",
-                "Continuous Edge Optimization"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 text-sm font-bold tracking-tight">
-                  <div className="w-6 h-6 rounded-lg bg-[#fd9a00]/10 flex items-center justify-center text-[#fd9a00]">
-                    <ChevronRight className="w-4 h-4" />
-                  </div>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative pt-10">
-            <CardSwap width="100%" height={450} cardDistance={40} verticalDistance={50} skewAmount={4}>
-              {[
-                {
-                  title: "Digital Strategy",
-                  description: "We map out your project's digital architecture to ensure bulletproof scalability and long-term success.",
-                  icon: <Globe className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-indigo-600 to-[#fd9a00]"
-                },
-                {
-                  title: "Immersive Design",
-                  description: "Crafting immersive UI/UX that captivates your audience and transforms visitors into lifelong advocates.",
-                  icon: <MousePointer2 className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-[#fd9a00] to-orange-600"
-                },
-                {
-                  title: "Elite Dev",
-                  description: "Turning complex blueprints into high-performance reality with clean, modular, and future-proof code.",
-                  icon: <Zap className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-blue-600 to-indigo-700"
-                },
-                {
-                  title: "Edge Tuning",
-                  description: "Continuous refinement and performance tuning to keep your product at the absolute edge of technology.",
-                  icon: <Laptop className="w-8 h-8" />,
-                  color: "bg-gradient-to-br from-emerald-600 to-teal-700"
-                }
-              ].map((item, i) => (
-                <Card key={i} className={`p-10 flex flex-col justify-center border border-white/20 shadow-2xl ${item.color}`}>
-                  <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mb-8 text-white shadow-xl">
-                    {item.icon}
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <p className="text-[10px] font-black tracking-[0.4em] text-white/40 uppercase">Phase 0{i + 1}</p>
-                    <h2 className="text-4xl font-black text-white tracking-tighter leading-none">{item.title}</h2>
-                    <p className="text-white/70 text-lg leading-relaxed font-medium">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-auto flex items-center gap-2 text-white/30 text-[9px] font-black tracking-[0.2em] uppercase">
-                    <div className="w-8 h-px bg-white/20" />
-                    <span>Auto-cycling active</span>
-                  </div>
-                </Card>
-              ))}
-            </CardSwap>
-          </div>
-        </div>
-      </section>
-
-      {/* Team & Vision Section */}
-      <section className="py-32 px-6 max-w-7xl mx-auto" id="about">
-        <div className="flex flex-col lg:flex-row gap-20 items-center mb-32">
-          <div className="lg:w-1/2">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[10px] font-black tracking-widest uppercase mb-8">
-              The Collective
-            </div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]">Meet the <br/><span className="text-[#fd9a00]">Programmers</span></h2>
-            <p className="text-[var(--text-muted)] text-xl mb-12 max-w-xl font-medium leading-relaxed">
-              VibeBuilds is a focused collective of elite developers and designers. We don't just build products; we engineer digital legacies for forward-thinking clients.
-            </p>
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">100%</h4>
-                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Commitment</p>
-              </div>
-              <div>
-                <h4 className="text-4xl font-black text-[#fd9a00] mb-2">24/7</h4>
-                <p className="text-xs font-black uppercase tracking-widest text-[var(--text-muted)]">Innovation</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="lg:w-1/2 overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-foreground/10">
-                  <th className="pb-4 text-left text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Member</th>
-                  <th className="pb-4 text-right text-[8px] font-black uppercase tracking-[0.3em] text-[#fd9a00]">Role</th>
-                </tr>
-              </thead>
-              <tbody>
-                {team.map((member, i) => (
-                  <tr key={i} className="group border-b border-foreground/5 hover:bg-foreground/[0.02] transition-colors">
-                    <td className="py-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl overflow-hidden border border-foreground/10 group-hover:border-[#fd9a00]/50 transition-colors">
-                          <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                        </div>
-                        <p className="text-sm font-black tracking-tight text-foreground">{member.name}</p>
-                      </div>
-                    </td>
-                    <td className="py-4 text-right">
-                      <div className="flex flex-col items-end gap-1">
-                        <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-tighter">{member.role}</p>
-                        <div className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full border text-[6px] font-black uppercase tracking-widest ${
-                          member.available 
-                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' 
-                            : 'bg-amber-500/10 border-amber-500/20 text-amber-500'
-                        }`}>
-                          <div className={`w-1 h-1 rounded-full ${member.available ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-                          {member.available ? 'Available' : 'On Job'}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                <tr>
-                  <td colSpan={2} className="pt-6">
-                    <Link to="/contact" className="flex items-center justify-between p-4 rounded-2xl border-2 border-dashed border-[#fd9a00]/30 hover:bg-[#fd9a00]/5 transition-all group">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-[#fd9a00]">Join The Collective</p>
-                      <ArrowRight className="w-4 h-4 text-[#fd9a00] group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Global Vision Banner */}
-        <div className="relative rounded-[48px] bg-foreground text-background p-12 md:p-24 overflow-hidden text-center">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#fd9a00]/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative z-10"
-          >
-            <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-8 leading-tight">
-              WE ARE LOOKING FOR <br/>
-              <span className="text-[#fd9a00]">CLIENTS & CHALLENGES</span>
-            </h2>
-            <p className="text-lg md:text-xl text-background/60 mb-12 max-w-2xl mx-auto font-medium">
-              Whether you're a startup looking to disrupt or an enterprise aiming to evolve, we have the engineering power to take you there.
-            </p>
-            <Link to="/contact">
-              <button className="px-12 py-5 rounded-2xl bg-[#fd9a00] text-white font-black text-sm tracking-widest hover:scale-105 transition-all shadow-2xl">
-                START A DISCOVERY SESSION
-              </button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
       <Footer />
+
+      <ProgrammerModal 
+        member={selectedMember}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
