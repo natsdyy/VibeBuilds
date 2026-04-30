@@ -129,9 +129,13 @@ const About: React.FC = () => {
                         <div>
                           <h3 className="text-2xl font-black tracking-tight text-foreground">
                             {member.name}
-                            <span className="text-[10px] font-black uppercase text-[#fd9a00] opacity-0 group-hover:opacity-100 transition-opacity ml-3">View Profile</span>
                           </h3>
-                          <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Programmer 0{i + 1}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest">Programmer 0{i + 1}</p>
+                            <div className="px-2 py-0.5 rounded-md bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[8px] font-black uppercase tracking-widest">
+                              View Profile
+                            </div>
+                          </div>
                         </div>
                       </button>
                     </td>

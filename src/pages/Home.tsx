@@ -198,10 +198,14 @@ const Home: React.FC = () => {
                         <div className="w-12 h-12 rounded-xl overflow-hidden border border-foreground/10 group-hover:border-[#fd9a00]/50 transition-colors">
                           <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                         </div>
-                        <p className="text-sm font-black tracking-tight text-foreground">
-                          {member.name} 
-                          <span className="text-[8px] font-black uppercase text-[#fd9a00] opacity-0 group-hover:opacity-100 transition-opacity ml-2">View Profile</span>
-                        </p>
+                        <div className="flex flex-col">
+                          <p className="text-sm font-black tracking-tight text-foreground">{member.name}</p>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <div className="px-2 py-0.5 rounded-md bg-[#fd9a00]/10 border border-[#fd9a00]/20 text-[#fd9a00] text-[8px] font-black uppercase tracking-widest">
+                              View Profile
+                            </div>
+                          </div>
+                        </div>
                       </button>
                     </td>
                     <td className="py-4 text-right">
