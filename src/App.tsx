@@ -23,6 +23,7 @@ import ProductConfigurator from './pages/labs/ProductConfigurator';
 import SmartCheckout from './pages/labs/SmartCheckout';
 import MMORPGLanding from './pages/mmorpg/Landing';
 import MMORPGPlay from './pages/mmorpg/Play';
+import NotFound from './pages/NotFound';
 
 
 import { DiscoveryProvider } from './context/DiscoveryContext';
@@ -109,7 +110,7 @@ return (
             <Route path="/labs/checkout" element={<SmartCheckout />} />
             <Route path="/mmorpg" element={<MMORPGLanding />} />
             <Route path="/mmorpg/play" element={<MMORPGPlay />} />
-
+            <Route path="*" element={<NotFound />} />
           </Routes>
       </>
   );
