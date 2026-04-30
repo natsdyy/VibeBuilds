@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, X, Phone, MoreVertical, MessageSquare } from 'lucide-react';
+import { Bot, X, Phone, MoreVertical, MessageSquare, Maximize2, Minimize2 } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import { useChat } from './useChat';
@@ -15,6 +15,9 @@ interface ChatInterfaceProps {
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ 
   onClose, 
+  onToggleExpand,
+  isExpanded = false,
+  isMobile = false,
   isDemo = false, 
   isLight = false,
   initialMessage,
@@ -54,6 +57,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         </div>
         
         <div className="flex items-center gap-2">
+          {!isMobile && onToggleExpand && (
+            <button 
+              onClick={onToggleExpand}
+              className={`p-2 rounded-xl transition-all ${closeButtonClasses}`}
+              title={isExpanded ? "Collapse" : "Expand"}
+            >
+              {isExpanded ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
+            </button>
+          )}
+          
           {isDemo ? (
             <>
               <button className="p-3 rounded-xl hover:bg-slate-200 transition-all text-slate-400">

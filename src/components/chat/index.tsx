@@ -5,6 +5,7 @@ import ChatToggle from './ChatToggle';
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isLight, setIsLight] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -43,7 +44,13 @@ const Chatbot: React.FC = () => {
               ? { opacity: 0, y: '100%' } 
               : { opacity: 0, y: 20, scale: 0.95, transformOrigin: 'bottom right' }
             }
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0, 
+              scale: 1,
+              width: isMobile ? '100%' : (isExpanded ? '800px' : '400px'),
+              height: isMobile ? '85vh' : (isExpanded ? '800px' : '600px'),
+            }}
             exit={isMobile 
               ? { opacity: 0, y: '100%' } 
               : { opacity: 0, y: 20, scale: 0.95 }
@@ -51,12 +58,15 @@ const Chatbot: React.FC = () => {
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className={`${
               isMobile 
-                ? 'w-full h-[85vh] rounded-t-[40px]' 
-                : 'mb-6 w-[400px] h-[600px] rounded-[32px]'
+                ? 'rounded-t-[40px]' 
+                : 'mb-6 rounded-[32px]'
             } border ${isLight ? 'border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)]' : 'border-white/10 shadow-2xl'} flex flex-col overflow-hidden ${isLight ? 'bg-white/95' : 'bg-black/80'} backdrop-blur-2xl`}
           >
             <ChatInterface 
               isLight={isLight} 
+              isMobile={isMobile}
+              isExpanded={isExpanded}
+              onToggleExpand={() => setIsExpanded(!isExpanded)}
               onClose={() => setIsOpen(false)} 
             />
           </motion.div>

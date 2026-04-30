@@ -1,6 +1,8 @@
 export interface ChatAction {
   label: string;
   path: string;
+  label2?: string;
+  path2?: string;
 }
 
 export type Sender = 'bot' | 'user';

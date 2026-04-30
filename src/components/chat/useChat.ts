@@ -9,8 +9,8 @@ const defaultHandles: ChatHandle[] = [
   },
   {
     pattern: ['service', 'what do you do', 'build', 'services'],
-    response: "We specialize in high-end digital solutions: Custom Web Apps, Game Development (MMORPGs), and AI-driven systems.",
-    action: { label: 'Explore Services', path: '/services' }
+    response: "Our Services:\n\n• Custom Business Systems (CRM, ERP, HR, Finance)\n• E‑commerce & POS Solutions\n• Mobile App Development\n• Data Analytics & Dashboards\n• Queueing & Booking Systems\n\n...and much more. We build systems that scale with your business!",
+    action: { label: 'Explore Services', path: '/services', label2:'View Samples', path2: '/labs' }
   },
   {
     pattern: ['contact', 'hire', 'reach'],

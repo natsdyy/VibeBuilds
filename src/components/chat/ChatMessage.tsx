@@ -36,13 +36,28 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, onActionClick, isDem
           <p>{message.text}</p>
           
           {message.action && (
-            <Link 
-              to={message.action.path}
-              onClick={onActionClick}
-              className="mt-4 flex items-center justify-center gap-2 px-4 py-2 bg-[#fd9a00] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-amber-500/20"
-            >
-              {message.action.label} <ArrowRight className="w-3 h-3" />
-            </Link>
+            <div className="mt-4 flex flex-col gap-2">
+              <Link 
+                to={message.action.path}
+                onClick={onActionClick}
+                className="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#fd9a00] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg shadow-amber-500/20"
+              >
+                {message.action.label} <ArrowRight className="w-3 h-3" />
+              </Link>
+              {message.action.label2 && message.action.path2 && (
+                <Link 
+                  to={message.action.path2}
+                  onClick={onActionClick}
+                  className={`flex items-center justify-center gap-2 px-4 py-2.5 text-[10px] font-black uppercase tracking-widest rounded-xl hover:scale-105 active:scale-95 transition-all border ${
+                    !isBot 
+                      ? 'bg-white/10 border-white/20 text-white' 
+                      : (isDemo || isLight ? 'bg-slate-200 border-slate-300 text-slate-700' : 'bg-white/5 border-white/10 text-white/90')
+                  }`}
+                >
+                  {message.action.label2} <ArrowRight className="w-3 h-3" />
+                </Link>
+              )}
+            </div>
           )}
 
           <div className={`flex items-center gap-1 mt-1.5 ${!isBot ? 'justify-end' : 'justify-start'}`}>
