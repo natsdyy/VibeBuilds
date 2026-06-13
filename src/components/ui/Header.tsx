@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, Users, Sun, Moon, Menu, X } from 'lucide-react';
+import { Globe, Users, Sun, Moon, Menu, X, MessageSquare, Mail } from 'lucide-react';
+import { Facebook } from './Facebook';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
@@ -71,6 +72,18 @@ const Header: React.FC = () => {
 
         {/* Right Side: Actions */}
         <div className="flex items-center gap-2 md:gap-4">
+          {/* Social Icons (Desktop) */}
+          <div className="hidden lg:flex items-center gap-4 mr-2 border-r border-foreground/10 pr-6">
+            <a href="https://www.facebook.com/profile.php?id=61588893476661" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-yellow-500 transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="https://discord.gg/FzW7XFnB4e" target="_blank" rel="noopener noreferrer" className="text-foreground/50 hover:text-yellow-500 transition-colors">
+              <MessageSquare className="w-4 h-4" />
+            </a>
+            <a href="mailto:vibebuilds.business@gmail.com" className="text-foreground/50 hover:text-yellow-500 transition-colors">
+              <Mail className="w-4 h-4" />
+            </a>
+          </div>
           {/* Theme Toggle - Now visible on mobile too */}
           <button 
             onClick={toggleTheme}
@@ -175,7 +188,19 @@ const Header: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
+                className="flex flex-col gap-6"
               >
+                <div className="flex justify-center gap-6 text-[var(--text-muted)]">
+                  <a href="https://www.facebook.com/profile.php?id=61588893476661" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition-colors">
+                    <Facebook className="w-6 h-6" />
+                  </a>
+                  <a href="https://discord.gg/FzW7XFnB4e" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-500 transition-colors">
+                    <MessageSquare className="w-6 h-6" />
+                  </a>
+                  <a href="mailto:vibebuilds.business@gmail.com" className="hover:text-yellow-500 transition-colors">
+                    <Mail className="w-6 h-6" />
+                  </a>
+                </div>
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
                   <button className="w-full py-5 rounded-2xl bg-foreground text-background font-black text-xs tracking-[0.2em] uppercase shadow-2xl">
                     GET STARTED

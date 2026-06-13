@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Header from '../components/ui/Header'
+import Footer from '../components/ui/Footer'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 
@@ -86,15 +87,7 @@ const About: React.FC = () => {
         </div>
       </main>
 
-      <footer className="py-20 border-t border-[var(--border)] bg-[var(--background)] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="text-[10px] font-black tracking-widest text-foreground/10 uppercase">© 2026 VibeBuilds Digital</div>
-           <div className="flex gap-8 text-[10px] font-black tracking-widest text-[var(--text-muted)]">
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Terms</a>
-            </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MessageSquare, Phone, Send } from 'lucide-react'
+import { Mail, MessageSquare, Send } from 'lucide-react'
+import { Facebook } from '../components/ui/Facebook'
 import Header from '../components/ui/Header'
+import Footer from '../components/ui/Footer'
 import GridBackground from '../components/animations/GridBackground'
 import BlurText from '../components/animations/BlurText'
 
@@ -38,7 +40,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">Email Us</h3>
-                  <p className="text-[var(--text-muted)] text-lg">hello@vibebuilds.com</p>
+                  <a href="mailto:vibebuilds.business@gmail.com" className="block text-[var(--text-muted)] text-lg hover:text-yellow-500 transition-colors">vibebuilds.business@gmail.com</a>
                   <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Response within 24h</p>
                 </div>
               </div>
@@ -48,20 +50,20 @@ const Contact: React.FC = () => {
                   <MessageSquare className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Live Chat</h3>
-                  <p className="text-[var(--text-muted)] text-lg">Available Mon-Fri, 9am-6pm</p>
-                  <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Immediate Support</p>
+                  <h3 className="text-xl font-bold mb-2">Discord Community</h3>
+                  <a href="https://discord.gg/FzW7XFnB4e" target="_blank" rel="noopener noreferrer" className="block text-[var(--text-muted)] text-lg hover:text-yellow-500 transition-colors">Join our Server</a>
+                  <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Live Support</p>
                 </div>
               </div>
 
               <div className="flex gap-8 items-start group">
                 <div className="w-16 h-16 rounded-[24px] bg-yellow-500/10 text-yellow-500 flex items-center justify-center group-hover:scale-110 group-hover:bg-yellow-500 group-hover:text-white transition-all duration-500 shadow-xl shadow-yellow-500/5">
-                  <Phone className="w-6 h-6" />
+                  <Facebook className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mb-2">Call Us</h3>
-                  <p className="text-[var(--text-muted)] text-lg">+1 (555) 123-4567</p>
-                  <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Worldwide Coverage</p>
+                  <h3 className="text-xl font-bold mb-2">Facebook</h3>
+                  <a href="https://www.facebook.com/profile.php?id=61588893476661" target="_blank" rel="noopener noreferrer" className="block text-[var(--text-muted)] text-lg hover:text-yellow-500 transition-colors">Follow our Page</a>
+                  <p className="text-[var(--text-muted)] text-sm mt-1 uppercase tracking-widest font-black opacity-30">Stay Updated</p>
                 </div>
               </div>
             </motion.div>
@@ -97,15 +99,7 @@ const Contact: React.FC = () => {
         </div>
       </main>
 
-      <footer className="py-20 border-t border-[var(--border)] bg-[var(--background)] transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="text-[10px] font-black tracking-widest text-foreground/10 uppercase">© 2026 VibeBuilds Digital</div>
-           <div className="flex gap-8 text-[10px] font-black tracking-widest text-[var(--text-muted)]">
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors uppercase">Terms</a>
-            </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
