@@ -14,7 +14,7 @@ const Logo: React.FC<LogoProps> = ({ className = "" }) => {
           alt="VibeBuilds" 
           className="h-9 w-auto group-hover:scale-105 transition-transform duration-500" 
         />
-        <div className="absolute inset-0 bg-purple-500 blur-2xl opacity-10 group-hover:opacity-20 transition-opacity -z-10" />
+        <div className="absolute inset-0 bg-yellow-500 blur-2xl opacity-10 group-hover:opacity-20 transition-opacity -z-10" />
       </div>
     </div>
   );

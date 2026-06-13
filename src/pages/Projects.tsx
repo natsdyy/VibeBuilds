@@ -20,7 +20,7 @@ import dynmoviesVideo from '../assets/ProjectsVideo/Dynmovies.mp4'
 import ismeyeVideo from "../assets/ProjectsVideo/Ismeye'sHaven.mp4"
 
 const projects = [
-  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-purple-500 to-indigo-600" },
+  { name: "Dynmovs", image: dynmovs, category: "Streaming App", color: "from-yellow-500 to-indigo-600" },
   { name: "DynBooth", image: dynbooth, category: "Photo Experience", color: "from-[#fd9a00] to-orange-600" },
   { name: "Ismeye's Haven", image: ismeye, category: "Digital Marketplace", color: "from-amber-500 to-orange-600" },
   { name: "DDC", image: ddc, category: "Premium Service", color: "from-emerald-500 to-teal-600" },
@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
   const [selectedVideo, setSelectedVideo] = useState<{name: string, video: string} | null>(null);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-purple-500/30 overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--background)] font-sans text-foreground selection:bg-yellow-500/30 overflow-x-hidden transition-colors duration-300">
       <GridBackground lineColor="rgba(168, 85, 247, 0.1)" spacing={60} />
       <Header />
 
@@ -107,9 +107,9 @@ const Projects: React.FC = () => {
 
           <div className="mb-32">
             <div className="flex items-center gap-4 mb-12">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-purple-500">Mobile Experience</h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
+              <h2 className="text-[10px] font-black tracking-[0.4em] uppercase text-yellow-500">Mobile Experience</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
             </div>
 
             {/* Horizontal Mobile Carousel */}
@@ -133,7 +133,7 @@ const Projects: React.FC = () => {
                     key={i}
                     className="flex-shrink-0 w-[240px] md:w-[280px] group"
                   >
-                    <div className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-purple-500/20 group-hover:-translate-y-4 group-hover:rotate-1">
+                    <div className="relative aspect-[9/18.5] rounded-[40px] overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-yellow-500/20 group-hover:-translate-y-4 group-hover:rotate-1">
                       <img 
                         src={project.image} 
                         alt={project.name}
@@ -141,7 +141,7 @@ const Projects: React.FC = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                       <div className="absolute bottom-8 left-6 right-6">
-                        <p className="text-[8px] font-black tracking-widest text-purple-400 uppercase mb-2">{project.category}</p>
+                        <p className="text-[8px] font-black tracking-widest text-yellow-400 uppercase mb-2">{project.category}</p>
                         <h3 className="text-2xl font-black text-white tracking-tighter">{project.name}</h3>
                       </div>
                     </div>
@@ -209,7 +209,7 @@ const Projects: React.FC = () => {
                   key={i}
                   className="relative aspect-video rounded-[40px] bg-foreground/[0.02] border border-dashed border-foreground/10 flex flex-col items-center justify-center group overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="w-20 h-20 rounded-full bg-foreground/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Laptop className="w-8 h-8 text-[var(--text-muted)]" />
                   </div>
