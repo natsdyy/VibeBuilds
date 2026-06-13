@@ -44,22 +44,8 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'px-6 py-4' : 'px-0 py-0'}`}>
-      <motion.div 
-        animate={{
-          maxWidth: isScrolled ? '1280px' : '100%',
-          borderRadius: isScrolled ? '1rem' : '0rem',
-          paddingLeft: isScrolled ? '1.5rem' : '2.5rem',
-          paddingRight: isScrolled ? '1.5rem' : '2.5rem',
-          paddingTop: isScrolled ? '0.75rem' : '1.25rem',
-          paddingBottom: isScrolled ? '0.75rem' : '1.25rem',
-          backgroundColor: isScrolled ? 'var(--card-bg)' : 'transparent',
-          borderColor: isScrolled ? 'var(--border)' : 'transparent',
-          boxShadow: isScrolled ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)' : 'none',
-        }}
-        transition={{ type: 'tween', duration: 0.8, ease: 'easeInOut' }}
-        className="mx-auto flex items-center justify-between backdrop-blur-xl border transition-colors duration-300"
-      >
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[var(--card-bg)]/90 backdrop-blur-xl border-b border-[var(--border)] shadow-sm py-4' : 'bg-transparent py-6'}`}>
+      <div className="max-w-[1280px] w-full mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Left Side: Logo & Navigation */}
         <div className="flex items-center gap-10">
           <Link to="/">
@@ -73,7 +59,7 @@ const Header: React.FC = () => {
                 to={link.path}
                 className={`transition-colors cursor-pointer ${
                   location.pathname === link.path 
-                    ? 'text-purple-500' 
+                    ? 'text-yellow-500' 
                     : 'text-[var(--text-muted)] hover:text-foreground'
                 }`}
               >
@@ -131,7 +117,7 @@ const Header: React.FC = () => {
             </AnimatePresence>
           </button>
         </div>
-      </motion.div>
+      </div>
 
       {/* Mobile Sidebar Navigation */}
       <AnimatePresence>
@@ -175,7 +161,7 @@ const Header: React.FC = () => {
                         to={link.path}
                         onClick={() => setIsMenuOpen(false)}
                         className={`text-xl font-black tracking-[0.2em] uppercase transition-all ${
-                          location.pathname === link.path ? 'text-purple-500' : 'text-[var(--text-muted)] hover:text-foreground'
+                          location.pathname === link.path ? 'text-yellow-500' : 'text-[var(--text-muted)] hover:text-foreground'
                         }`}
                       >
                         {link.name}
